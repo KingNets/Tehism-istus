@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Tool Mapping</title>
+</head>
+<body>
+    <h1>Test Tool ID Generation</h1>
+    <div id="results"></div>
+    
+    <script>
+        const nameMapping = {
+            'artlist': 'artlist',
+            'kling': 'klingai',
+            'klingai': 'klingai'
+        };
+        
+        function testToolName(name) {
+            let toolId = name
+                .toLowerCase()
+                .trim()
+                .replace(/\s+/g, '')
+                .replace(/[^a-z0-9]/g, '')
+                .replace(/ai$/, '');
+            
+            const mappedId = nameMapping[toolId] || toolId;
+            
+            return {
+                original: name,
+                generated: toolId,
+                mapped: mappedId
+            };
+        }
+        
+        const tests = [
+            'Artlist',
+            'Kling AI',
+            'Wan 2.2',
+            'Alibaba Wan 2.1'
+        ];
+        
+        const resultsDiv = document.getElementById('results');
+        tests.forEach(test => {
+            const result = testToolName(test);
+            resultsDiv.innerHTML += `<p><strong>${result.original}</strong> → generated: "${result.generated}" → mapped: "${result.mapped}"</p>`;
+        });
+    </script>
+</body>
+</html>

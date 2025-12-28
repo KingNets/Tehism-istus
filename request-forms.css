@@ -1,0 +1,81 @@
+.tool-card.request-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.tool-card.request-card .request-subtitle {
+  margin-top: -6px;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.tool-card.request-card .request-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+  flex: 1 1 auto;
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.tool-card.request-card label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.tool-card.request-card input,
+.tool-card.request-card textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border-radius: 50px;
+  border: 2px solid #000;
+  background: rgba(255, 255, 255, 0.9);
+  font: inherit;
+  outline: none;
+}
+
+.tool-card.request-card textarea {
+  resize: vertical;
+  min-height: 56px;
+  border-radius: 15px;
+}
+
+.tool-card.request-card input:focus,
+.tool-card.request-card textarea:focus {
+  border-color: #ffde00;
+  background: #ffde00;
+}
+
+.tool-card.request-card .request-send {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 50px;
+  border: 2px solid #000;
+  cursor: pointer;
+  font-weight: 700;
+  position: sticky;
+  bottom: 0;
+  background: #ffde00;
+  color: #000;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.tool-card.request-card .request-send:hover {
+  background: #000;
+  color: #ffde00;
+  transform: translateY(-2px);
+}
+
+.tool-card.request-card .request-status {
+  min-height: 18px;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
