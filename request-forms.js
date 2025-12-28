@@ -1,4 +1,4 @@
-const ADMIN_EMAIL = "YOUR_EMAIL_HERE@example.com";
+const ADMIN_EMAIL = "info.reydan@gmail.com";
 
 document.addEventListener("DOMContentLoaded", () => {
 
