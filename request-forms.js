@@ -1,4 +1,4 @@
-const ADMIN_EMAIL = "info.reydan@gmail.com";
+const ADMIN_EMAIL = "info@tehismõistus.ee";
 
 document.addEventListener("DOMContentLoaded", () => {
 
