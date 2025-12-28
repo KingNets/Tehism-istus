@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `Website: ${toolUrl || "-"}`,
         `Notes: ${message || "-"}`,
         "",
-        "Sent from Aetherfield AI tools page."
+        "Sent from Tehismõistus AI tools page."
       ];
       const body = bodyLines.join("\n");
 

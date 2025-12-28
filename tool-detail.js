@@ -4940,7 +4940,7 @@ function loadToolDetails() {
     }
 
     // Update page title
-    document.getElementById('tool-title').textContent = `${toolData.name} - Aetherfield`;
+    document.getElementById('tool-title').textContent = `${toolData.name} - Tehismõistus`;
     document.getElementById('detail-title').textContent = toolData.name;
 
     // Update badges
