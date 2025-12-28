@@ -884,22 +884,34 @@ footer {
     }
     
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
     }
     
     .search-box {
         padding: 0.8rem 1.5rem;
         border-radius: 12px;
+        max-width: 100%;
     }
     
     .categories {
-        padding: 2rem;
-        margin: 1rem auto 3rem;
+        padding: 1rem;
+        margin: 1rem auto 2rem;
     }
     
     .category-grid {
         grid-template-columns: 1fr;
         gap: 0.8rem;
+    }
+    
+    .category-title {
+        font-size: 1.5rem;
+        margin-top: 3rem;
+        margin-bottom: 1.5rem;
     }
     
     .tools-section {
@@ -908,14 +920,33 @@ footer {
     }
     
     .tools-grid {
+        display: grid;
+        grid-template-columns: 1fr;
         gap: 1.5rem;
+        justify-content: stretch;
     }
     
     .tool-card {
         width: 100%;
-        flex: 1;
+        flex: none;
+        max-width: none;
         padding: 1.5rem;
         min-height: auto;
+    }
+    
+    .tool-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .tool-title {
+        font-size: 1.3rem;
+    }
+    
+    .tool-description {
+        font-size: 0.95rem;
+        line-height: 1.5;
     }
     
     .additional-sections {
@@ -930,7 +961,7 @@ footer {
     
     .contact-content {
         grid-template-columns: 1fr;
-        padding: 2rem;
+        padding: 1rem;
     }
     
     .top-bar {
