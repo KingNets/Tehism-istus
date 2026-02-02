@@ -1072,6 +1072,49 @@ body::before {
     opacity: 0;
     animation: fadeInUp 0.6s ease forwards;
     animation-delay: 0.3s;
+    position: relative;
+}
+
+/* Category scroll buttons */
+.category-scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #374151;
+}
+
+.category-scroll-btn:hover {
+    background: #f3f4f6;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.category-scroll-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.category-scroll-left {
+    left: 0;
+}
+
+.category-scroll-right {
+    right: 0;
+}
+
+.category-scroll-btn i {
+    width: 1.25rem;
+    height: 1.25rem;
 }
 
 .categories-wrapper {
@@ -1079,6 +1122,9 @@ body::before {
     gap: var(--spacing-3);
     overflow-x: auto;
     padding-bottom: var(--spacing-2);
+    padding-left: 3rem;
+    padding-right: 3rem;
+    scroll-behavior: smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }

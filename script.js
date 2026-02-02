@@ -507,12 +507,36 @@ function setupCategoryFilters() {
     });
 }
 
+// Setup category scroll buttons
+function setupCategoryScrollButtons() {
+    const scrollLeft = document.getElementById('categoryScrollLeft');
+    const scrollRight = document.getElementById('categoryScrollRight');
+    const categoriesWrapper = document.getElementById('categoriesWrapper');
+    
+    if (scrollLeft && scrollRight && categoriesWrapper) {
+        scrollLeft.addEventListener('click', () => {
+            categoriesWrapper.scrollBy({
+                left: -200,
+                behavior: 'smooth'
+            });
+        });
+        
+        scrollRight.addEventListener('click', () => {
+            categoriesWrapper.scrollBy({
+                left: 200,
+                behavior: 'smooth'
+            });
+        });
+    }
+}
+
 // Initialize App
 document.addEventListener('DOMContentLoaded', function () {
     // Critical operations first
     populateCategories();
     setupSearch();
     setupCategoryFilters();
+    setupCategoryScrollButtons();
 
     // Cache all tool cards and their original grid
     window.allToolCardsCache = [];
