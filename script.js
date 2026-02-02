@@ -2201,7 +2201,17 @@ async function openToolModal(data) {
         ${renderFeatures(toolData.features)}
         ${renderPricing(toolData.pricing)}
         ${renderUseCases(toolData.kasutusviisid || toolData.useCases)}
-        ${await renderReviewSection(toolData.name, data.rating)}
+        <div id="reviewSectionContainer">
+            <div class="modal-section review-section">
+                <div class="review-header">
+                    <h3 class="modal-section-title">Hinnangud ja Küsimused</h3>
+                </div>
+                <div style="text-align: center; padding: 2rem;">
+                    <div class="loading-spinner"></div>
+                    <p style="margin-top: 1rem; color: #94a3b8;">Laen hinnanguid...</p>
+                </div>
+            </div>
+        </div>
 
         <div class="modal-actions">
             <a href="${toolData.website}" target="_blank" class="modal-btn-primary" style="text-decoration:none; display:flex; justify-content:center; align-items:center;">
@@ -2211,51 +2221,55 @@ async function openToolModal(data) {
         </div>
     `;
 
+    // Show modal immediately
     modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden'; // Prevent background scrolling
 
     // Re-init icons inside modal
     if (window.lucide) window.initLucideIcons();
     
-    // Initialize review form if it exists
-    initializeReviewForm(toolData.name);
-    
-    // Initialize tabs
-    initializeReviewTabs();
-    
-    // Initialize question form
-    initializeQuestionForm(toolData.name);
-    
-    // Initialize reply forms
-    initializeReplyForms(toolData.name);
-    
-    // If a specific question ID is provided, switch to Q&A tab and scroll to it
-    if (data.questionId) {
-        // Wait a bit for modal content to render
-        setTimeout(() => {
-            // Switch to questions tab
-            const questionsTab = document.querySelector('.review-tab[data-tab="questions"]');
-            if (questionsTab) {
-                questionsTab.click();
-            }
+    // Load reviews asynchronously (non-blocking)
+    renderReviewSection(toolData.name, data.rating).then(reviewHTML => {
+        const container = document.getElementById('reviewSectionContainer');
+        if (container) {
+            container.innerHTML = reviewHTML;
+            // Re-init icons for the review section
+            if (window.lucide) window.initLucideIcons();
+            // Initialize review interactions
+            initializeReviewForm(toolData.name);
+            initializeReviewTabs();
+            initializeQuestionForm(toolData.name);
+            initializeReplyForms(toolData.name);
             
-            // Wait a bit more for tab content to be visible
-            setTimeout(() => {
-                // Scroll to the specific question
-                const questionElement = document.querySelector(`.question-item[data-question-id="${data.questionId}"]`);
-                if (questionElement) {
-                    questionElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    // Add a highlight effect
-                    questionElement.style.backgroundColor = 'rgba(99, 102, 241, 0.1)';
+            // If a specific question ID is provided, switch to Q&A tab and scroll to it
+            if (data.questionId) {
+                // Wait a bit for modal content to render
+                setTimeout(() => {
+                    // Switch to questions tab
+                    const questionsTab = document.querySelector('.review-tab[data-tab="questions"]');
+                    if (questionsTab) {
+                        questionsTab.click();
+                    }
+                    
+                    // Wait a bit more for tab content to be visible
                     setTimeout(() => {
-                        questionElement.style.backgroundColor = '';
-                    }, 2000);
-                } else {
-                    console.log(`Question with ID ${data.questionId} not found in modal`);
-                }
-            }, 150);
-        }, 100);
-    }
+                        // Scroll to the specific question
+                        const questionElement = document.querySelector(`.question-item[data-question-id="${data.questionId}"]`);
+                        if (questionElement) {
+                            questionElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            // Add a highlight effect
+                            questionElement.style.backgroundColor = 'rgba(99, 102, 241, 0.1)';
+                            setTimeout(() => {
+                                questionElement.style.backgroundColor = '';
+                            }, 2000);
+                        } else {
+                            console.log(`Question with ID ${data.questionId} not found in modal`);
+                        }
+                    }, 150);
+                }, 100);
+            }
+        }
+    });
 }
 
 // Close Modal
