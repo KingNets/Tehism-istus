@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Lisa AI Tööriist</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .admin-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .admin-header h1 {
+            margin: 0 0 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .admin-header p {
+            margin: 0;
+            color: #6b7280;
+        }
+
+        .admin-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #1a1a1a;
+            font-size: 0.875rem;
+        }
+
+        .form-group label .required {
+            color: #ef4444;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 0.9375rem;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group small {
+            color: #6b7280;
+            font-size: 0.75rem;
+        }
+
+        .tag-input-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            min-height: 44px;
+            cursor: text;
+        }
+
+        .tag-input-container:focus-within {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .tag {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            background: #3b82f6;
+            color: white;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+        }
+
+        .tag button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tag-input-container input {
+            border: none;
+            outline: none;
+            flex: 1;
+            min-width: 120px;
+            padding: 0.25rem;
+            font-size: 0.875rem;
+        }
+
+        .pricing-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .pricing-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 0.9375rem;
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message,
+        .error-message {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
+
+        .success-message.show,
+        .error-message.show {
+            display: block;
+        }
+
+        .json-preview {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .preview-toggle {
+            cursor: pointer;
+            color: #3b82f6;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .preview-toggle:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>🛠️ Admin Panel</h1>
+            <p>Lisa uus AI tööriist</p>
+        </div>
+
+        <div id="successMessage" class="success-message">
+            AI tööriist edukalt lisatud! <a href="#" onclick="location.reload()">Lisa veel üks</a>
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+
+        <form id="adminForm" class="admin-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nimi <span class="required">*</span></label>
+                    <input type="text" name="name" required placeholder="nt. ChatGPT">
+                </div>
+
+                <div class="form-group">
+                    <label>Kategooria <span class="required">*</span></label>
+                    <select name="category" required>
+                        <option value="">Vali kategooria...</option>
+                        <option value="text">Tekst</option>
+                        <option value="image">Pildid</option>
+                        <option value="video">Videod</option>
+                        <option value="audio">Heli</option>
+                        <option value="code">Kood</option>
+                        <option value="chat">Vestlus</option>
+                        <option value="productivity">Tootlikkus</option>
+                        <option value="design">Disain</option>
+                        <option value="marketing">Turundus</option>
+                        <option value="data">Andmed</option>
+                        <option value="other">Muu</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label>Kirjeldus <span class="required">*</span></label>
+                <textarea name="description" required placeholder="Lühike kirjeldus tööriista kohta..."></textarea>
+                <small>Kirjelda, mida see AI tööriist teeb</small>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>URL <span class="required">*</span></label>
+                    <input type="url" name="url" required placeholder="https://example.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Logo URL</label>
+                    <input type="url" name="logo" placeholder="https://example.com/logo.png">
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label>Märksõnad (vajuta Enter pärast iga märksõna)</label>
+                <div class="tag-input-container" id="tagsContainer">
+                    <input type="text" id="tagInput" placeholder="Sisesta märksõna ja vajuta Enter">
+                </div>
+                <input type="hidden" name="tags" id="tagsHidden">
+                <small>Näiteks: chatbot, tekst, kirjutamine</small>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Hinnang (1-5)</label>
+                    <input type="number" name="rating" min="1" max="5" step="0.1" placeholder="4.5">
+                </div>
+
+                <div class="form-group">
+                    <label>Hinnangute arv</label>
+                    <input type="number" name="reviews" min="0" placeholder="100">
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label>Hinnakujundus</label>
+                <div class="pricing-group">
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" name="free" id="freeCheckbox">
+                        Tasuta
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" name="freemium" id="freemiumCheckbox">
+                        Freemium
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" name="paid" id="paidCheckbox">
+                        Tasuline
+                    </label>
+                </div>
+                <input type="text" name="pricing" placeholder="nt. Alates $9.99/kuu" style="margin-top: 0.5rem;">
+            </div>
+
+            <div class="form-group full-width">
+                <label>Omadused (üks rea kohta)</label>
+                <textarea name="features" rows="4" placeholder="Omadus 1&#10;Omadus 2&#10;Omadus 3"></textarea>
+                <small>Iga omadus eraldi real</small>
+            </div>
+
+            <div class="form-group full-width">
+                <label>
+                    <span class="preview-toggle" onclick="togglePreview()">▶ Näita JSON eelvaadet</span>
+                </label>
+                <div id="jsonPreview" class="json-preview" style="display: none;"></div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="resetForm()">Tühjenda</button>
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                    Lisa AI tööriist
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Tags functionality
+        const tagsContainer = document.getElementById('tagsContainer');
+        const tagInput = document.getElementById('tagInput');
+        const tagsHidden = document.getElementById('tagsHidden');
+        let tags = [];
+
+        tagInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const value = tagInput.value.trim();
+                if (value && !tags.includes(value)) {
+                    tags.push(value);
+                    updateTags();
+                    tagInput.value = '';
+                }
+            }
+        });
+
+        function removeTag(tag) {
+            tags = tags.filter(t => t !== tag);
+            updateTags();
+        }
+
+        function updateTags() {
+            tagsHidden.value = JSON.stringify(tags);
+            const tagElements = tags.map(tag => `
+                <div class="tag">
+                    ${tag}
+                    <button type="button" onclick="removeTag('${tag}')">×</button>
+                </div>
+            `).join('');
+            tagsContainer.innerHTML = tagElements + '<input type="text" id="tagInput" placeholder="Sisesta märksõna ja vajuta Enter">';
+            
+            // Re-attach event listener to new input
+            const newInput = document.getElementById('tagInput');
+            newInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const value = newInput.value.trim();
+                    if (value && !tags.includes(value)) {
+                        tags.push(value);
+                        updateTags();
+                    }
+                }
+            });
+        }
+
+        // Preview functionality
+        function togglePreview() {
+            const preview = document.getElementById('jsonPreview');
+            const toggle = document.querySelector('.preview-toggle');
+            if (preview.style.display === 'none') {
+                updatePreview();
+                preview.style.display = 'block';
+                toggle.textContent = '▼ Peida JSON eelvaade';
+            } else {
+                preview.style.display = 'none';
+                toggle.textContent = '▶ Näita JSON eelvaadet';
+            }
+        }
+
+        function updatePreview() {
+            const formData = new FormData(document.getElementById('adminForm'));
+            const data = {
+                name: formData.get('name') || '',
+                category: formData.get('category') || '',
+                description: formData.get('description') || '',
+                url: formData.get('url') || '',
+                logo: formData.get('logo') || '',
+                tags: tags,
+                rating: parseFloat(formData.get('rating')) || 0,
+                reviews: parseInt(formData.get('reviews')) || 0,
+                pricing: {
+                    free: formData.get('free') === 'on',
+                    freemium: formData.get('freemium') === 'on',
+                    paid: formData.get('paid') === 'on',
+                    details: formData.get('pricing') || ''
+                },
+                features: formData.get('features') ? formData.get('features').split('\n').filter(f => f.trim()) : [],
+                dateAdded: new Date().toISOString()
+            };
+            document.getElementById('jsonPreview').textContent = JSON.stringify(data, null, 2);
+        }
+
+        // Update preview on input
+        document.getElementById('adminForm').addEventListener('input', () => {
+            if (document.getElementById('jsonPreview').style.display !== 'none') {
+                updatePreview();
+            }
+        });
+
+        // Form submission
+        document.getElementById('adminForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const successMsg = document.getElementById('successMessage');
+            const errorMsg = document.getElementById('errorMessage');
+            
+            successMsg.classList.remove('show');
+            errorMsg.classList.remove('show');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Lisab...';
+            
+            try {
+                const formData = new FormData(e.target);
+                const toolData = {
+                    name: formData.get('name'),
+                    category: formData.get('category'),
+                    description: formData.get('description'),
+                    url: formData.get('url'),
+                    logo: formData.get('logo'),
+                    tags: tags,
+                    rating: parseFloat(formData.get('rating')) || 0,
+                    reviews: parseInt(formData.get('reviews')) || 0,
+                    pricing: {
+                        free: formData.get('free') === 'on',
+                        freemium: formData.get('freemium') === 'on',
+                        paid: formData.get('paid') === 'on',
+                        details: formData.get('pricing') || ''
+                    },
+                    features: formData.get('features') ? formData.get('features').split('\n').filter(f => f.trim()) : [],
+                    dateAdded: new Date().toISOString()
+                };
+
+                const response = await fetch('http://localhost:5001/api/admin/tools', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+                    },
+                    body: JSON.stringify(toolData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    successMsg.classList.add('show');
+                    resetForm();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    throw new Error(result.message || 'Viga AI tööriista lisamisel');
+                }
+            } catch (error) {
+                errorMsg.textContent = error.message;
+                errorMsg.classList.add('show');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Lisa AI tööriist';
+            }
+        });
+
+        function resetForm() {
+            document.getElementById('adminForm').reset();
+            tags = [];
+            updateTags();
+            document.getElementById('jsonPreview').style.display = 'none';
+            document.querySelector('.preview-toggle').textContent = '▶ Näita JSON eelvaadet';
+        }
+
+        // Check admin authentication on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const adminToken = localStorage.getItem('adminToken');
+            if (!adminToken) {
+                const password = prompt('Sisesta admin parool:');
+                if (password === 'admin123') { // Change this to a secure password
+                    localStorage.setItem('adminToken', 'admin-' + Date.now());
+                } else {
+                    alert('Vale parool!');
+                    window.location.href = 'index.html';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

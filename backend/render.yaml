@@ -1,0 +1,10 @@
+# Render.com Build & Deploy Configuration
+# This file tells Render how to build and run the backend
+
+# Build Command
+buildCommand: npm install
+
+# Start Command  
+startCommand: npm start
+
+# Environment (auto-detected: Node.js)

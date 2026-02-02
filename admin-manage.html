@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - AI Tööriistade Haldus</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .admin-header h1 {
+            margin: 0;
+            color: #1a1a1a;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+            font-size: 0.875rem;
+            padding: 0.5rem 1rem;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-edit {
+            background: #f59e0b;
+            color: white;
+            font-size: 0.875rem;
+            padding: 0.5rem 1rem;
+        }
+
+        .btn-edit:hover {
+            background: #d97706;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filters select,
+        .filters input {
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 0.9375rem;
+        }
+
+        .filters input {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .tools-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .tool-card {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 1rem;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .tool-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            background: #f3f4f6;
+            padding: 0.5rem;
+        }
+
+        .tool-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .tool-name {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: #1a1a1a;
+        }
+
+        .tool-description {
+            color: #6b7280;
+            font-size: 0.9375rem;
+        }
+
+        .tool-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .tool-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .tool-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 0.25rem 0.5rem;
+            background: #dbeafe;
+            color: #1e40af;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+        }
+
+        .tool-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: flex-end;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #6b7280;
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 0.5rem;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        @media (max-width: 768px) {
+            .tool-card {
+                grid-template-columns: 1fr;
+            }
+
+            .tool-actions {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            .filters input,
+            .filters select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>🛠️ AI Tööriistade Haldus</h1>
+            <a href="admin.html" class="btn btn-primary">+ Lisa uus tööriist</a>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-label">Tööriistade arv</span>
+                <span class="stat-value" id="totalTools">-</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Kategooriad</span>
+                <span class="stat-value" id="totalCategories">-</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Keskmine hinnang</span>
+                <span class="stat-value" id="avgRating">-</span>
+            </div>
+        </div>
+
+        <div class="filters">
+            <select id="categoryFilter">
+                <option value="">Kõik kategooriad</option>
+                <option value="text">Tekst</option>
+                <option value="image">Pildid</option>
+                <option value="video">Videod</option>
+                <option value="audio">Heli</option>
+                <option value="code">Kood</option>
+                <option value="chat">Vestlus</option>
+                <option value="productivity">Tootlikkus</option>
+                <option value="design">Disain</option>
+                <option value="marketing">Turundus</option>
+                <option value="data">Andmed</option>
+                <option value="other">Muu</option>
+            </select>
+            <input type="text" id="searchInput" placeholder="Otsi nimest või kirjeldusest...">
+        </div>
+
+        <div id="loadingState" class="loading">
+            Laadimine...
+        </div>
+
+        <div id="toolsGrid" class="tools-grid" style="display: none;"></div>
+
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <h3>Tööriistasid ei leitud</h3>
+            <p>Lisa esimene AI tööriist, klõpsates üleval nupule "Lisa uus tööriist"</p>
+        </div>
+    </div>
+
+    <script>
+        let allTools = [];
+        const adminToken = localStorage.getItem('adminToken');
+
+        // Check authentication
+        if (!adminToken) {
+            const password = prompt('Sisesta admin parool:');
+            if (password === 'admin123') {
+                localStorage.setItem('adminToken', 'admin-' + Date.now());
+            } else {
+                alert('Vale parool!');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Load tools on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTools();
+
+            // Filter listeners
+            document.getElementById('categoryFilter').addEventListener('change', filterTools);
+            document.getElementById('searchInput').addEventListener('input', filterTools);
+        });
+
+        async function loadTools() {
+            try {
+                const response = await fetch('http://localhost:5001/api/admin/tools?limit=1000');
+                const result = await response.json();
+
+                if (result.success) {
+                    allTools = result.data.tools;
+                    updateStats();
+                    displayTools(allTools);
+                }
+            } catch (error) {
+                console.error('Error loading tools:', error);
+                document.getElementById('loadingState').textContent = 'Viga tööriistade laadimisel';
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('totalTools').textContent = allTools.length;
+            
+            const categories = new Set(allTools.map(t => t.category));
+            document.getElementById('totalCategories').textContent = categories.size;
+            
+            const avgRating = allTools.reduce((sum, t) => sum + t.rating, 0) / allTools.length || 0;
+            document.getElementById('avgRating').textContent = avgRating.toFixed(1);
+        }
+
+        function displayTools(tools) {
+            const grid = document.getElementById('toolsGrid');
+            const loading = document.getElementById('loadingState');
+            const empty = document.getElementById('emptyState');
+
+            loading.style.display = 'none';
+
+            if (tools.length === 0) {
+                grid.style.display = 'none';
+                empty.style.display = 'block';
+                return;
+            }
+
+            empty.style.display = 'none';
+            grid.style.display = 'grid';
+
+            grid.innerHTML = tools.map(tool => `
+                <div class="tool-card">
+                    <img src="${tool.logo || 'ai-cloud.png'}" alt="${tool.name}" class="tool-logo" onerror="this.src='ai-cloud.png'">
+                    <div class="tool-info">
+                        <div class="tool-name">${tool.name}</div>
+                        <div class="tool-description">${tool.description}</div>
+                        <div class="tool-meta">
+                            <span>⭐ ${tool.rating || 0}</span>
+                            <span>📝 ${tool.reviews || 0} arvustust</span>
+                            <span>👁️ ${tool.views || 0} vaatamist</span>
+                            <span>📅 ${new Date(tool.dateAdded).toLocaleDateString('et-EE')}</span>
+                        </div>
+                        <div class="tool-tags">
+                            ${(tool.tags || []).map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="tool-actions">
+                        <button class="btn btn-edit" onclick="editTool('${tool._id}')">Muuda</button>
+                        <button class="btn btn-danger" onclick="deleteTool('${tool._id}', '${tool.name}')">Kustuta</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterTools() {
+            const category = document.getElementById('categoryFilter').value;
+            const search = document.getElementById('searchInput').value.toLowerCase();
+
+            let filtered = allTools;
+
+            if (category) {
+                filtered = filtered.filter(t => t.category === category);
+            }
+
+            if (search) {
+                filtered = filtered.filter(t => 
+                    t.name.toLowerCase().includes(search) || 
+                    t.description.toLowerCase().includes(search)
+                );
+            }
+
+            displayTools(filtered);
+        }
+
+        async function deleteTool(id, name) {
+            if (!confirm(`Kas oled kindel, et soovid kustutada "${name}"?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:5001/api/admin/tools/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${adminToken}`
+                    }
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Tööriist edukalt kustutatud');
+                    loadTools();
+                } else {
+                    alert('Viga: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error deleting tool:', error);
+                alert('Viga tööriista kustutamisel');
+            }
+        }
+
+        function editTool(id) {
+            // For now, just open admin.html - in future, could pre-fill form with tool data
+            alert('Muutmise funktsioon tulemas! ID: ' + id);
+            // window.location.href = `admin.html?edit=${id}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,2441 +1,2616 @@
 <!DOCTYPE html>
 <html lang="et">
+
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z1GWTJF0CH"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-      gtag('config', 'G-Z1GWTJF0CH');
+        gtag('config', 'G-Z1GWTJF0CH');
     </script>
 
-    <meta charset="utf-8"></meta>
+    <meta charset="utf-8">
+    </meta>
 
-    <meta
-        content="width=device-width, initial-scale=1.0"
-        name="viewport"
-    ></meta>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    </meta>
 
     <title>
         AI sinu vajadustele Üheskohas - Tehismõistus
     </title>
 
-    <link
-        href="https://fonts.googleapis.com"
-        rel="preconnect"
-    ></link>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    </link>
 
-    <link
-        crossorigin=""
-        href="https://fonts.gstatic.com"
-        rel="preconnect"
-    ></link>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    </link>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Indie+Flower&amp;family=Elms+Sans:wght@400;500;600;700&amp;display=swap"
-        rel="stylesheet"
-    ></link>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </link>
 
-    <link rel="icon" type="image/png" href="ai-cloud.png" />
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-    <link
-        href="styles.css"
-        rel="stylesheet"
-    ></link>
+    <link rel="icon" type="image/png" href="logo-favicon.png" />
 
-    <link
-        href="request-forms.css"
-        rel="stylesheet"
-    ></link>
+    <link href="styles.css" rel="stylesheet">
+    </link>
+
+    <link href="request-forms.css" rel="stylesheet">
+    </link>
 </head>
 
 <body>
-    <header class="header">
-        <div class="inner-header">
-            <!-- Yellow top bar with moving text -->
-            <div class="top-bar">
-                <div class="top-bar-category-text">AI</div>
-                <div class="tech-category-moving-section">
-                    <div class="moving-tech-list-wrapper">
-                        <div class="moving-tech-list">
-                            <div class="moving-tech-item">
-                                <span class="moving-tech-text">🤖 Avasta parimad AI tööriistad</span>
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <img src="logo-transparent.png" alt="Tehismõistus" style="width: 48px; height: 48px;">
+                    </div>
+                    <div>
+                        <h1 class="logo-title">Tehismõistus</h1>
+                        <p class="logo-subtitle">AI sinu vajadustele</p>
+                    </div>
+                </div>
+
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <!-- Bug Report Button -->
+                    <button id="bugReportBtn" class="bug-report-btn" title="Teavita veast">
+                        <i data-lucide="bug"></i>
+                        <span class="bug-report-text">Teata viga</span>
+                    </button>
+
+                    <!-- Notification Bell (only visible when logged in) -->
+                    <div id="notificationWrapper" class="notification-wrapper" style="display: none;">
+                        <button id="notificationBtn" class="notification-btn">
+                            <i data-lucide="bell"></i>
+                            <span id="notificationBadge" class="notification-badge" style="display: none;">0</span>
+                        </button>
+                        
+                        <!-- Notification Dropdown -->
+                        <div id="notificationDropdown" class="notification-dropdown hidden">
+                            <div class="notification-dropdown-header">
+                                <h3>Teavitused</h3>
+                                <button id="markAllReadBtn" class="mark-all-read-btn">
+                                    <i data-lucide="check-check"></i>
+                                    <span>Märgi kõik loetuks</span>
+                                </button>
                             </div>
-                            <div class="moving-tech-item">
-                                <span class="moving-tech-text">✨ Tehisintellekt igale vajadusele</span>
+                            <div id="notificationList" class="notification-list">
+                                <div class="notification-empty">
+                                    <i data-lucide="inbox"></i>
+                                    <p>Teavitusi pole</p>
+                                </div>
                             </div>
-                            <div class="moving-tech-item">
-                                <span class="moving-tech-text">🚀 Automatiseeri oma töövoog</span>
+                        </div>
+                    </div>
+
+                    <!-- User Menu -->
+                    <div class="user-menu-wrapper">
+                        <button id="userMenuBtn" class="user-menu-btn">
+                            <div class="user-avatar">
+                                <i data-lucide="user"></i>
                             </div>
-                            <div class="moving-tech-item">
-                                <span class="moving-tech-text">💡 Innovatiivsed lahendused</span>
+                            <span class="user-name">Külaline</span>
+                            <i data-lucide="chevron-down" class="chevron-icon"></i>
+                        </button>
+
+                    <!-- User Dropdown -->
+                    <div id="userDropdown" class="user-dropdown hidden">
+                        <div class="user-dropdown-header">
+                            <p class="dropdown-name">Külaline</p>
+                            <p class="dropdown-email">Logi sisse, et näha rohkem</p>
+                        </div>
+                        <div class="user-dropdown-menu">
+                            <!-- Guest Menu Items (shown when NOT logged in) -->
+                            <div id="guest-menu-items">
+                                <button id="dropdown-login-btn" class="dropdown-item">
+                                    <i data-lucide="log-in"></i>
+                                    <span>Logi sisse</span>
+                                </button>
+                                <button id="dropdown-register-btn" class="dropdown-item">
+                                    <i data-lucide="user-plus"></i>
+                                    <span>Registreeru</span>
+                                </button>
+                            </div>
+                            
+                            <!-- User Menu Items (shown when logged in) -->
+                            <div id="user-menu-items" style="display: none;">
+                                <button id="profile-link-btn" class="dropdown-item">
+                                    <i data-lucide="user"></i>
+                                    <span>Profiil</span>
+                                </button>
+                                <button id="logout-btn" class="dropdown-item">
+                                    <i data-lucide="log-out"></i>
+                                    <span>Logi välja</span>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
-
-            <!-- Main navigation -->
-            <nav class="navbar">
-                <div class="nav-left">
-                    <h1 class="logo">Tehismõistus</h1>
-                </div>
-
-                <div class="nav-right">
-                    <a href="#categories" class="nav-link">⚙ Kategooriad</a>
-                    <a href="#contact" class="nav-link">✉ Kontakt</a>
-                </div>
-            </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero">
-            <h1 class="hero-title">
-                <span class="elsie-text">Leia oma ideaalne</span>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="trending-badge">
+                    <i data-lucide="zap"></i>
+                    <span>Trending AI Tools 2026</span>
+                </div>
 
-                <span class="techno-word">TEHISMÕISTUS</span>
-            </h1>
+                <h2 class="hero-title">
+                    Leia endale parim
+                    <span class="hero-title-gradient">Tehismõistus</span>
+                </h2>
 
+                <p class="hero-description">
+                    Avasta tehismõistuste kogum - hinda AI lahendusi, küsi nende kohta küsimusi või sirvi AI kategooriaid.
+                </p>
+            </div>
+
+            <!-- Search Bar -->
             <div class="search-container">
-                <div class="search-box">
-                    <span class="search-icon">•</span>
-
-                    <input
-                        class="search-input"
-                        placeholder="Kirjuta mida tahad teha, näiteks 'tahan kirjutada artikli' või 'vaja luua pilte'..."
-                        type="text"
-                    ></input>
-
-                    <button class="search-button">Otsi</button>
+                <div class="search-wrapper">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Otsi AI tööriistu..." class="search-input" />
                 </div>
             </div>
 
-            <div class="categories" id="categories">
-                <h2 class="categories-heading">Kategooriad</h2>
+            <!-- Categories -->
+            <section class="categories-section">
+                <div class="categories-container">
+                    <div id="categoriesWrapper" class="categories-wrapper">
+                        <!-- Categories will be dynamically inserted here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Latest Reviews and Questions Section -->
+            <section class="community-section">
+                <div class="community-container">
+                    <div class="community-grid">
+                        <!-- Latest Reviews Column -->
+                        <div class="community-column">
+                            <div class="community-header">
+                                <h2 class="community-title">
+                                    <i data-lucide="star"></i>
+                                    Viimased hinnangud
+                                </h2>
+                            </div>
+                            <div class="community-items" id="latestReviewsContainer">
+                                <!-- Reviews will be loaded here -->
+                                <div class="community-loading">
+                                    <i data-lucide="loader"></i>
+                                    <p>Laadimine...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Latest Questions Column -->
+                        <div class="community-column">
+                            <div class="community-header">
+                                <h2 class="community-title">
+                                    <i data-lucide="help-circle"></i>
+                                    Viimased küsimused
+                                </h2>
+                            </div>
+                            <div class="community-items" id="latestQuestionsContainer">
+                                <!-- Questions will be loaded here -->
+                                <div class="community-loading">
+                                    <i data-lucide="loader"></i>
+                                    <p>Laadimine...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Highest Rated AI-s Section -->
+            <section class="community-section">
+                <div class="community-container">
+                    <div class="community-grid">
+                        <!-- Highest Rated AI-s Column -->
+                        <div class="community-column">
+                            <div class="community-header">
+                                <h2 class="community-title">
+                                    <i data-lucide="trophy"></i>
+                                    Kõrgeima hinnanguga AI-d
+                                </h2>
+                            </div>
+                            <div class="community-items" id="highestRatedContainer">
+                                <!-- Highest rated AI tools will be loaded here -->
+                                <div class="community-loading">
+                                    <i data-lucide="loader"></i>
+                                    <p>Laadimine...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- New AI-s Column -->
+                        <div class="community-column">
+                            <div class="community-header">
+                                <h2 class="community-title">
+                                    <i data-lucide="sparkles"></i>
+                                    Uued AI-d
+                                </h2>
+                            </div>
+                            <div class="community-items" id="newAIsContainer">
+                                <!-- New AI tools will be loaded here -->
+                                <div class="community-loading">
+                                    <i data-lucide="loader"></i>
+                                    <p>Laadimine...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tools-section">
+                <h2 class="category-title">Kirjutamise AI Tööriistad</h2>
+
+                <div class="tools-grid writing-tools">
+                    <div class="tool-card">
+                        <h3>Novel AI</h3>
+
+                        <div class="tool-tags">
+                            <span class="tag">Writing</span>
+
+                            <span class="tag">Storytelling</span>
 
-                <div class="category-grid">
-                    <div class="category-item">• Kirjutamine</div>
+                            <span class="tag">Image Generation</span>
 
-                    <div class="category-item">• Pildiloomine</div>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                    <div class="category-item">• Kunst</div>
-
-                    <div class="category-item">• Chatbot</div>
-                </div>
-
-                <div class="category-grid">
-                    <div class="category-item">• Kõne</div>
-
-                    <div class="category-item">• Muusika</div>
+                        <p>
+                            Spetsiaalne ilukirjanduse ja lugude kirjutamise tööriist koos pildigeneraatoriga.
+                        </p>
+                    </div>
 
-                    <div class="category-item">• Video</div>
+                    <div class="tool-card">
+                        <h3>Supawrite</h3>
 
-                    <div class="category-item">• Klienditeenus</div>
-                </div>
+                        <div class="tool-tags">
+                            <span class="tag">Content</span>
 
-                <div class="category-grid">
-                    <div class="category-item">• Tutvumine</div>
+                            <span class="tag">SEO</span>
 
-                    <div class="category-item">• Sotsiaalmeedia</div>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                    <div class="category-item">• Turundus</div>
+                        <p>
+                            Supawrite on põhjalik sisu automatiseerimise platvorm, mis muudab ettevõtteid tunnustatud
+                            valdkonna autoriteetideks läbi strateegiliselt loodud, avaldamisvalmis sisu.
+                        </p>
+                    </div>
 
-                    <div class="category-item">• Programmeerimine</div>
-                </div>
+                    <div class="tool-card">
+                        <h3>EssayPass</h3>
 
-                <div class="category-grid">
-                    <div class="category-item">• Investeerimine</div>
+                        <div class="tool-tags">
+                            <span class="tag">Academic</span>
 
-                    <div class="category-item">• Reisimine</div>
+                            <span class="tag">Writing</span>
 
-                    <div class="category-item">• Õppimine</div>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                    <div class="category-item">• Automatiseerimine</div>
-                </div>
+                        <p>
+                            EssayPass on keerukas akadeemiline kirjutamistööriist, mis aitab üliõpilastel ja teadlastel
+                            luua
+                            kvaliteetseid esseid, uurimistöid ja aruandeid.
+                        </p>
+                    </div>
 
-                <div class="category-grid">
-                    <div class="category-item">• Tervis</div>
+                    <div class="tool-card">
+                        <h3>Copyter</h3>
 
-                    <div class="category-item">• Anime</div>
+                        <div class="tool-tags">
+                            <span class="tag">Writing</span>
 
-                    <div class="category-item">• Produktiivsus</div>
+                            <span class="tag">Content</span>
 
-                    <div class="category-item">• E-kaubandus</div>
-                </div>
+                            <span class="tag">SEO</span>
 
-                <div class="category-grid">
-                    <div class="category-item">• Keeled</div>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                    <div class="category-item">• AI Tuvastus</div>
+                        <p>
+                            Copyter on juhtiv lahendus otsingumootoritele optimeeritud sisu kiireks genereerimiseks,
+                            kasutades edasijõudnud arvutustehnikaid.
+                        </p>
+                    </div>
 
-                    <div class="category-item">• Uuringud</div>
+                    <div class="tool-card">
+                        <h3>RewriteBar</h3>
 
-                    <div class="category-item">• Finants</div>
-                </div>
+                        <div class="tool-tags">
+                            <span class="tag">Writing</span>
 
-                <div class="category-grid">
-                    <div class="category-item">• Podcast</div>
+                            <span class="tag">Mac</span>
 
-                    <div class="category-item">• Kokkuvõtted</div>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                    <div class="category-item">• Haridus</div>
+                        <p>
+                            RewriteBar on võimas kirjutamise täiustamise utiliit, mis on loodud eranditult macOS
+                            keskkonnale, pakkudes kohest kontekstuaalset abi.
+                        </p>
+                    </div>
 
-                    <div class="category-item">• Töökohad</div>
-                </div>
+                    <div class="tool-card">
+                        <h3>Humanize AI</h3>
 
-                <div class="category-grid">
-                    <div class="category-item">• Rollimäng</div>
+                        <div class="tool-tags">
+                            <span class="tag">Writing</span>
 
-                    <div class="category-item">• Täiskasvanute sisu</div>
+                            <span class="tag">Text Editor</span>
 
-                    <div class="category-item">• Tasuta</div>
-                </div>
-            </div>
-        </section>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-        <section class="tools-section">
-            <h2 class="category-title">Kirjutamise AI Tööriistad</h2>
+                        <p>
+                            Humanize.sh on juhtiv veebivahend, mis muudab AI poolt genereeritud teksti loomulikult
+                            kõlavaks
+                            inimlikuks kirjutamiseks.
+                        </p>
+                    </div>
 
-            <div class="tools-grid writing-tools">
-                <div class="tool-card">
-                    <h3>Novel AI</h3>
+                    <div class="tool-card">
+                        <h3>WebNovel AI</h3>
 
-                    <div class="tool-tags">
-                        <span class="tag">Writing</span>
+                        <div class="tool-tags">
+                            <span class="tag">Writing</span>
 
-                        <span class="tag">Storytelling</span>
+                            <span class="tag">Fiction</span>
 
-                        <span class="tag">Image Generation</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            WebNovel AI pakub terviklikku platvorm, mis juhendab kirjanikke läbi kogu veebinovelli
+                            loomise
+                            protsessi ideest valmis teoseni.
+                        </p>
                     </div>
 
-                    <p>
-                        Spetsiaalne ilukirjanduse ja lugude kirjutamise tööriist koos pildigeneraatoriga.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>First Book AI</h3>
 
-                <div class="tool-card">
-                    <h3>Supawrite</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Creation</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Content</span>
+                            <span class="tag">Book Writing</span>
 
-                        <span class="tag">SEO</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            First Book AI on revolutsiooniline platvorm raamatute loomise demokratiseerimiseks
+                            ettevõtjatele, meeskondadele ja ihaleval autoritele.
+                        </p>
                     </div>
 
-                    <p>
-                        Supawrite on põhjalik sisu automatiseerimise platvorm, mis muudab ettevõtteid tunnustatud valdkonna autoriteetideks läbi strateegiliselt loodud, avaldamisvalmis sisu.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>WriteHybrid</h3>
 
-                <div class="tool-card">
-                    <h3>EssayPass</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Writing</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Academic</span>
+                            <span class="tag">Content Creation</span>
 
-                        <span class="tag">Writing</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            WriteHybrid on võimas AI humaniseerija, mis muudab tehisaru poolt genereeritud teksti
+                            loomulikult ja autentselt kõlavaks sisuks.
+                        </p>
                     </div>
-
-                    <p>
-                        EssayPass on keerukas akadeemiline kirjutamistööriist, mis aitab üliõpilastel ja teadlastel luua kvaliteetseid esseid, uurimistöid ja aruandeid.
-                    </p>
-                </div>
 
-                <div class="tool-card">
-                    <h3>Copyter</h3>
+                    <div class="tool-card">
+                        <h3>BookScribi</h3>
 
-                    <div class="tool-tags">
-                        <span class="tag">Writing</span>
+                        <div class="tool-tags">
+                            <span class="tag">Writing</span>
 
-                        <span class="tag">Content</span>
+                            <span class="tag">Publishing</span>
 
-                        <span class="tag">SEO</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            BookScribi on terviklik platvorm mittefiktsionaalsete raamatute ja luulekogude loomiseks
+                            ilma,
+                            et autor peaks ise ühtegi sõna kirjutama.
+                        </p>
                     </div>
 
-                    <p>
-                        Copyter on juhtiv lahendus otsingumootoritele optimeeritud sisu kiireks genereerimiseks, kasutades edasijõudnud arvutustehnikaid.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>MyStylus</h3>
 
-                <div class="tool-card">
-                    <h3>RewriteBar</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Writing</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Writing</span>
+                            <span class="tag">Education</span>
 
-                        <span class="tag">Mac</span>
+                            <span class="tag">Academic</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            MyStylus on AI-põhine akadeemilise kirjutamise assistent, mis toetab üliõpilasi, teadlasi ja
+                            kirjanikke läbi kogu kirjutamisprotsessi.
+                        </p>
                     </div>
 
-                    <p>
-                        RewriteBar on võimas kirjutamise täiustamise utiliit, mis on loodud eranditult macOS keskkonnale, pakkudes kohest kontekstuaalset abi.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>AutoWrite App</h3>
 
-                <div class="tool-card">
-                    <h3>Humanize AI</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Writing</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Writing</span>
+                            <span class="tag">SEO Tools</span>
 
-                        <span class="tag">Text Editor</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            AutoWrite App on terviklik sisu loomise platvorm, mis aitab blogijatel, turundajatel ja
+                            ettevõtetel luua kvaliteetset, SEO-optimeeritud sisu.
+                        </p>
                     </div>
 
-                    <p>
-                        Humanize.sh on juhtiv veebivahend, mis muudab AI poolt genereeritud teksti loomulikult kõlavaks inimlikuks kirjutamiseks.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Paraphrasing Tool</h3>
 
-                <div class="tool-card">
-                    <h3>WebNovel AI</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Writing</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Writing</span>
+                            <span class="tag">Text Processing</span>
 
-                        <span class="tag">Fiction</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Paraphrasing Tool on AI-põhine rakendus, mis aitab kasutajatel kiiresti ja tõhusalt teksti
+                            ümber
+                            sõnastada, säilitades algse tähenduse.
+                        </p>
                     </div>
-
-                    <p>
-                        WebNovel AI pakub terviklikku platvorm, mis juhendab kirjanikke läbi kogu veebinovelli loomise protsessi ideest valmis teoseni.
-                    </p>
-                </div>
-
-                <div class="tool-card">
-                    <h3>First Book AI</h3>
 
-                    <div class="tool-tags">
-                        <span class="tag">Creation</span>
+                    <div class="tool-card request-card" data-category="Kirjutamise AI Tööriistad">
+                        <h3>Taotle tööriista lisamist</h3>
 
-                        <span class="tag">Book Writing</span>
+                        <p class="request-subtitle">
+                            Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
+                        </p>
 
-                        <span class="tag">Paid</span>
+                        <button class="request-trigger-btn">Saada</button>
                     </div>
-
-                    <p>
-                        First Book AI on revolutsiooniline platvorm raamatute loomise demokratiseerimiseks ettevõtjatele, meeskondadele ja ihaleval autoritele.
-                    </p>
                 </div>
-
-                <div class="tool-card">
-                    <h3>WriteHybrid</h3>
-
-                    <div class="tool-tags">
-                        <span class="tag">Writing</span>
 
-                        <span class="tag">Content Creation</span>
+                <h2 class="category-title">Kunsti AI Tööriistad</h2>
 
-                        <span class="tag">Freemium</span>
-                    </div>
-
-                    <p>
-                        WriteHybrid on võimas AI humaniseerija, mis muudab tehisaru poolt genereeritud teksti loomulikult ja autentselt kõlavaks sisuks.
-                    </p>
-                </div>
+                <div class="tools-grid art-tools">
+                    <div class="tool-card">
+                        <h3>Gemini 3</h3>
 
-                <div class="tool-card">
-                    <h3>BookScribi</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Technology</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Writing</span>
+                            <span class="tag">Multimodal AI</span>
 
-                        <span class="tag">Publishing</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Gemini 3 on Google'i kõige edasijõudnum AI mudel, mis on loodud ellu viima iga idee
+                            erakordse
+                            sügavuse ja nüansseeritusega.
+                        </p>
                     </div>
 
-                    <p>
-                        BookScribi on terviklik platvorm mittefiktsionaalsete raamatute ja luulekogude loomiseks ilma, et autor peaks ise ühtegi sõna kirjutama.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Seedream 4.0</h3>
 
-                <div class="tool-card">
-                    <h3>MyStylus</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Image Generation</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Writing</span>
+                            <span class="tag">Imaging</span>
 
-                        <span class="tag">Education</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Academic</span>
+                        <p>
+                            Seedream 4.0 on tipptasemel pildiloome mudel ByteDance'ilt, mis integreerib nii piltide
+                            genereerimise kui ka piltide redigeerimise võimalused.
+                        </p>
                     </div>
 
-                    <p>
-                        MyStylus on AI-põhine akadeemilise kirjutamise assistent, mis toetab üliõpilasi, teadlasi ja kirjanikke läbi kogu kirjutamisprotsessi.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Nano-banana (Gemini 2.5)</h3>
 
-                <div class="tool-card">
-                    <h3>AutoWrite App</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Graphics</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Writing</span>
+                            <span class="tag">Image Editing</span>
 
-                        <span class="tag">SEO Tools</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Gemini 2.5 Flash Image, koodinimega Nano Banana, on tipptasemel pildigenereerimine ja
+                            -redigeerimine mudel, mis võimaldab kasutajatel segada erinevaid elemente.
+                        </p>
                     </div>
 
-                    <p>
-                        AutoWrite App on terviklik sisu loomise platvorm, mis aitab blogijatel, turundajatel ja ettevõtetel luua kvaliteetset, SEO-optimeeritud sisu.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>FLUX.1</h3>
 
-                <div class="tool-card">
-                    <h3>Paraphrasing Tool</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Imaging</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Writing</span>
+                            <span class="tag">Generative Media</span>
 
-                        <span class="tag">Text Processing</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Black Forest Labs on pioneering startup, mis spetsialiseerub tipptasemel generatiivse
+                            sügavõppe
+                            mudelite arendamisele kunstiloomingus.
+                        </p>
                     </div>
-
-                    <p>
-                        Paraphrasing Tool on AI-põhine rakendus, mis aitab kasutajatel kiiresti ja tõhusalt teksti ümber sõnastada, säilitades algse tähenduse.
-                    </p>
-                </div>
-
-                <div
-                    class="tool-card request-card"
-                    data-category="Kirjutamise AI Tööriistad"
-                >
-                    <h3>Taotle tööriista lisamist</h3>
-
-                    <p class="request-subtitle">
-                        Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
-                    </p>
-
-                    <form class="request-form">
-                        <label>
-                            AI tööriista nimi
-
-                            <input
-                                name="toolName"
-                                placeholder="Nt: Midjourney, Claude, ..."
-                                required=""
-                                type="text"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Veebileht (valikuline)
-
-                            <input
-                                name="toolUrl"
-                                placeholder="https://..."
-                                type="url"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Märkus (valikuline)
-
-                            <textarea
-                                name="message"
-                                placeholder="Mida see tööriist teeb, miks lisada, lisainfo..."
-                                rows="3"
-                            ></textarea>
-                        </label>
-
-                        <button
-                            class="request-send"
-                            type="submit"
-                        >Saada</button>
-
-                        <div
-                            aria-live="polite"
-                            class="request-status"
-                        ></div>
-                    </form>
-                </div>
-            </div>
 
-            <h2 class="category-title">Kunsti AI Tööriistad</h2>
+                    <div class="tool-card">
+                        <h3>Wan Animate</h3>
 
-            <div class="tools-grid art-tools">
-                <div class="tool-card">
-                    <h3>Gemini 3</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Animation</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Technology</span>
+                            <span class="tag">Character Replacement</span>
 
-                        <span class="tag">Multimodal AI</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Wan-Animate on terviklik raamistik, mis on loodud karakterite animatsiooniks ja
+                            asendamiseks,
+                            kasutades karakterite pilte.
+                        </p>
                     </div>
 
-                    <p>
-                        Gemini 3 on Google'i kõige edasijõudnum AI mudel, mis on loodud ellu viima iga idee erakordse sügavuse ja nüansseeritusega.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>DeepSeek R1</h3>
 
-                <div class="tool-card">
-                    <h3>Seedream 4.0</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Research</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Image Generation</span>
+                            <span class="tag">Reasoning</span>
 
-                        <span class="tag">Imaging</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            DeepSeek-R1 on tipptasemel suur keelemudel DeepSeek AI-lt, mis seab uued standardid
+                            põhjendamises, matemaatikas ja kodeerimises.
+                        </p>
                     </div>
 
-                    <p>
-                        Seedream 4.0 on tipptasemel pildiloome mudel ByteDance'ilt, mis integreerib nii piltide genereerimise kui ka piltide redigeerimise võimalused.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Ideogram</h3>
 
-                <div class="tool-card">
-                    <h3>Nano-banana (Gemini 2.5)</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Design</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Graphics</span>
+                            <span class="tag">Content Creation</span>
 
-                        <span class="tag">Image Editing</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            Ideogram on juhtiv generatiivse meedia platvorm, mis annab kasutajatele võimaluse luua
+                            vapustavaid pilte, graafikat ja tekstipõhist sisu.
+                        </p>
                     </div>
 
-                    <p>
-                        Gemini 2.5 Flash Image, koodinimega Nano Banana, on tipptasemel pildigenereerimine ja -redigeerimine mudel, mis võimaldab kasutajatel segada erinevaid elemente.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Google Veo 3</h3>
 
-                <div class="tool-card">
-                    <h3>FLUX.1</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Imaging</span>
+                            <span class="tag">Content Creation</span>
 
-                        <span class="tag">Generative Media</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Google Veo on tipptasemel videogeneratsiooni platvorm Google DeepMind'ilt, mis muudab
+                            loojate
+                            jaoks video loomise viisi.
+                        </p>
                     </div>
 
-                    <p>
-                        Black Forest Labs on pioneering startup, mis spetsialiseerub tipptasemel generatiivse sügavõppe mudelite arendamisele kunstiloomingus.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Kimi K2 Thinking</h3>
 
-                <div class="tool-card">
-                    <h3>Wan Animate</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Productivity</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Animation</span>
+                            <span class="tag">Autonomous agent</span>
 
-                        <span class="tag">Character Replacement</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            Kimi K2 on tipptasemel suur keelemudel Moonshot AI-lt, Beijing'i AI startup, mis on tuntud
+                            oma
+                            läbimurdva tehnoloogia poolest.
+                        </p>
                     </div>
 
-                    <p>
-                        Wan-Animate on terviklik raamistik, mis on loodud karakterite animatsiooniks ja asendamiseks, kasutades karakterite pilte.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>HiDream-I1</h3>
 
-                <div class="tool-card">
-                    <h3>DeepSeek R1</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Imaging</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Research</span>
+                            <span class="tag">Text-to-Image</span>
 
-                        <span class="tag">Reasoning</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            HiDream-I1 on avatud lähtekoodiga kõrge jõudlusega tekst-pildi genereerimise mudel, mis
+                            pakub
+                            fotorealistlikke ja loomingulisi tulemusi.
+                        </p>
                     </div>
 
-                    <p>
-                        DeepSeek-R1 on tipptasemel suur keelemudel DeepSeek AI-lt, mis seab uued standardid põhjendamises, matemaatikas ja kodeerimises.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Hailuo AI</h3>
 
-                <div class="tool-card">
-                    <h3>Ideogram</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Design</span>
+                            <span class="tag">Content Creation</span>
 
-                        <span class="tag">Content Creation</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Hailuo AI on tipptasemel videogeneraator mitme AI mudeliga (Hailuo 2.3, Sora 2.0, Veo 3.1).
+                            Agent tools, lip sync, music generation.
+                        </p>
                     </div>
 
-                    <p>
-                        Ideogram on juhtiv generatiivse meedia platvorm, mis annab kasutajatele võimaluse luua vapustavaid pilte, graafikat ja tekstipõhist sisu.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Pika</h3>
 
-                <div class="tool-card">
-                    <h3>Google Veo 3</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Video</span>
+                            <span class="tag">Content Creation</span>
 
-                        <span class="tag">Content Creation</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Pika Art on innovaatiline videogeneratsiooni platvorm, mis annab kasutajatele võimaluse luua
+                            kinemaatilisi animeeritud videoklipte lihtsatest käskudest.
+                        </p>
                     </div>
 
-                    <p>
-                        Google Veo on tipptasemel videogeneratsiooni platvorm Google DeepMind'ilt, mis muudab loojate jaoks video loomise viisi.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Suno AI</h3>
 
-                <div class="tool-card">
-                    <h3>Kimi K2 Thinking</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Music</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Productivity</span>
+                            <span class="tag">Song Generation</span>
 
-                        <span class="tag">Autonomous agent</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Suno on pioneering muusika genereerimise platvorm, mis võimaldab kasutajatel luua täielikke
+                            laule nullist, kasutades lihtsaid käske.
+                        </p>
                     </div>
 
-                    <p>
-                        Kimi K2 on tipptasemel suur keelemudel Moonshot AI-lt, Beijing'i AI startup, mis on tuntud oma läbimurdva tehnoloogia poolest.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Stable Diffusion XL</h3>
 
-                <div class="tool-card">
-                    <h3>HiDream-I1</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Imaging</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Imaging</span>
+                            <span class="tag">Content Creation</span>
 
-                        <span class="tag">Text-to-Image</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            Stable Diffusion on juhtiv generatiivse mudeli platvorm Stability AI-lt, mis muudab
+                            tekstikirjeldused kõrgekvaliteediliseks pildisisu.
+                        </p>
                     </div>
-
-                    <p>
-                        HiDream-I1 on avatud lähtekoodiga kõrge jõudlusega tekst-pildi genereerimise mudel, mis pakub fotorealistlikke ja loomingulisi tulemusi.
-                    </p>
-                </div>
-
-                <div class="tool-card">
-                    <h3>Hailuo AI</h3>
 
-                    <div class="tool-tags">
-                        <span class="tag">Video</span>
+                    <div class="tool-card request-card" data-category="Kunsti AI Tööriistad">
+                        <h3>Taotle tööriista lisamist</h3>
 
-                        <span class="tag">Content Creation</span>
+                        <p class="request-subtitle">
+                            Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
+                        </p>
 
-                        <span class="tag">Freemium</span>
+                        <button class="request-trigger-btn">Saada</button>
                     </div>
-
-                    <p>
-                        Hailuo AI on tipptasemel videogeneraator mitme AI mudeliga (Hailuo 2.3, Sora 2.0, Veo 3.1). Agent tools, lip sync, music generation.
-                    </p>
                 </div>
-
-                <div class="tool-card">
-                    <h3>Pika</h3>
-
-                    <div class="tool-tags">
-                        <span class="tag">Video</span>
 
-                        <span class="tag">Content Creation</span>
+                <h2 class="category-title">Video AI Tööriistad</h2>
 
-                        <span class="tag">Freemium</span>
-                    </div>
+                <div class="tools-grid video-tools">
+                    <div class="tool-card">
+                        <h3>Artlist</h3>
 
-                    <p>
-                        Pika Art on innovaatiline videogeneratsiooni platvorm, mis annab kasutajatele võimaluse luua kinemaatilisi animeeritud videoklipte lihtsatest käskudest.
-                    </p>
-                </div>
+                        <div class="tool-tags">
+                            <span class="tag">Featured</span>
 
-                <div class="tool-card">
-                    <h3>Suno AI</h3>
+                            <span class="tag">Video</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Music</span>
+                            <span class="tag">Content Creation</span>
 
-                        <span class="tag">Song Generation</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Artlist.io on kõik-ühes tellimusplatvorm, mis teenindab peamiselt videosisu loojaid,
+                            filmitegijaid ja sotsiaalmeedia sisu tootjaid, kes vajavad kõrgekvaliteedilisi digitaalseid
+                            ressursse.
+                        </p>
                     </div>
 
-                    <p>
-                        Suno on pioneering muusika genereerimise platvorm, mis võimaldab kasutajatel luua täielikke laule nullist, kasutades lihtsaid käske.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Wan 2.2</h3>
 
-                <div class="tool-card">
-                    <h3>Stable Diffusion XL</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Imaging</span>
+                            <span class="tag">Content Generation</span>
 
-                        <span class="tag">Content Creation</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Wan2.2 on avatud ja edasijõudnud suuremahulise videogeneratsiooni mudel, mis tutvustab
+                            Mixture-of-Experts (MoE) arhitektuuri video difusioonmudelitesse.
+                        </p>
                     </div>
-
-                    <p>
-                        Stable Diffusion on juhtiv generatiivse mudeli platvorm Stability AI-lt, mis muudab tekstikirjeldused kõrgekvaliteediliseks pildisisu.
-                    </p>
-                </div>
 
-                <div
-                    class="tool-card request-card"
-                    data-category="Kunsti AI Tööriistad"
-                >
-                    <h3>Taotle tööriista lisamist</h3>
-
-                    <p class="request-subtitle">
-                        Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
-                    </p>
-
-                    <form class="request-form">
-                        <label>
-                            AI tööriista nimi
-
-                            <input
-                                name="toolName"
-                                placeholder="Nt: Midjourney, Claude, ..."
-                                required=""
-                                type="text"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Veebileht (valikuline)
-
-                            <input
-                                name="toolUrl"
-                                placeholder="https://..."
-                                type="url"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Märkus (valikuline)
-
-                            <textarea
-                                name="message"
-                                placeholder="Mida see tööriist teeb, miks lisada, lisainfo..."
-                                rows="3"
-                            ></textarea>
-                        </label>
-
-                        <button
-                            class="request-send"
-                            type="submit"
-                        >Saada</button>
-
-                        <div
-                            aria-live="polite"
-                            class="request-status"
-                        ></div>
-                    </form>
-                </div>
-            </div>
-
-            <h2 class="category-title">Video AI Tööriistad</h2>
+                    <div class="tool-card">
+                        <h3>Kling AI</h3>
 
-            <div class="tools-grid video-tools">
-                <div class="tool-card">
-                    <h3>Artlist</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Featured</span>
+                            <span class="tag">Content Creation</span>
 
-                        <span class="tag">Video</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Content Creation</span>
-
-                        <span class="tag">Paid</span>
+                        <p>
+                            Kling AI on tipptasemel videogeneratsiooni platvorm, mis on loodud andma loojatele võimalust
+                            toota kõrgekvaliteedilisi, realistlikke videoid edasijõudnud generatiivse tehnoloogia abil.
+                        </p>
                     </div>
 
-                    <p>
-                        Artlist.io on kõik-ühes tellimusplatvorm, mis teenindab peamiselt videosisu loojaid, filmitegijaid ja sotsiaalmeedia sisu tootjaid, kes vajavad kõrgekvaliteedilisi digitaalseid ressursse.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Alibaba Wan 2.1</h3>
 
-                <div class="tool-card">
-                    <h3>Wan 2.2</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Video</span>
+                            <span class="tag">Content Creation</span>
 
-                        <span class="tag">Content Generation</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            Wan 2.1 Video Generator on tipptasemel platvorm kiireks, kõrgekvaliteediliseks video
+                            loomiseks
+                            teksti või pildi käskudest, keskendudes nii mitmekülgsusele kui ka jõudlusele.
+                        </p>
                     </div>
 
-                    <p>
-                        Wan2.2 on avatud ja edasijõudnud suuremahulise videogeneratsiooni mudel, mis tutvustab Mixture-of-Experts (MoE) arhitektuuri video difusioonmudelitesse.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Hunyuan Video</h3>
 
-                <div class="tool-card">
-                    <h3>Kling AI</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Video</span>
+                            <span class="tag">Open Source</span>
 
-                        <span class="tag">Content Creation</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            HunyuanVideo, mille on välja töötanud Tencent, on läbimurdeline avatud lähtekoodiga
+                            tekst-video
+                            genereerimise raamistik, mis seab uued standardid generatiivse videotehnoloogia valdkonnas.
+                        </p>
                     </div>
 
-                    <p>
-                        Kling AI on tipptasemel videogeneratsiooni platvorm, mis on loodud andma loojatele võimalust toota kõrgekvaliteedilisi, realistlikke videoid edasijõudnud generatiivse tehnoloogia abil.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>FramePack</h3>
 
-                <div class="tool-card">
-                    <h3>Alibaba Wan 2.1</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Video</span>
+                            <span class="tag">Content Creation</span>
 
-                        <span class="tag">Content Creation</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            FramePack on innovaatiline järgmise kaadri ennustamise mudel, mis on loodud
+                            revolutsioniseerima
+                            videogeneratsiooni, muutes selle sama tõhusaks kui pildigenereerimise.
+                        </p>
                     </div>
 
-                    <p>
-                        Wan 2.1 Video Generator on tipptasemel platvorm kiireks, kõrgekvaliteediliseks video loomiseks teksti või pildi käskudest, keskendudes nii mitmekülgsusele kui ka jõudlusele.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Kling 2.5</h3>
 
-                <div class="tool-card">
-                    <h3>Hunyuan Video</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Video</span>
+                            <span class="tag">Cinematic creation</span>
 
-                        <span class="tag">Open Source</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            Kling 2.5 Turbo Pro on uusim kõrge jõudlusega AI videogeneratsiooni mudel Kling AI-lt
+                            Kuaishou
+                            poolt, mis on loodud kinemaatilise kvaliteediga videote loomiseks.
+                        </p>
                     </div>
 
-                    <p>
-                        HunyuanVideo, mille on välja töötanud Tencent, on läbimurdeline avatud lähtekoodiga tekst-video genereerimise raamistik, mis seab uued standardid generatiivse videotehnoloogia valdkonnas.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Wan 2.5</h3>
 
-                <div class="tool-card">
-                    <h3>FramePack</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Video</span>
+                            <span class="tag">Content Creation</span>
 
-                        <span class="tag">Content Creation</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            Wan 2.5 on edasijõudnud AI-põhine videogeneraator, mis muudab teksti või pildid
+                            professionaalse
+                            kvaliteediga videoteks sisseehitatud sünkroniseeritud heliga.
+                        </p>
                     </div>
 
-                    <p>
-                        FramePack on innovaatiline järgmise kaadri ennustamise mudel, mis on loodud revolutsioniseerima videogeneratsiooni, muutes selle sama tõhusaks kui pildigenereerimise.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Sora 2</h3>
 
-                <div class="tool-card">
-                    <h3>Kling 2.5</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Video</span>
+                            <span class="tag">Creative platform</span>
 
-                        <span class="tag">Cinematic creation</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Sora 2 on OpenAI uusim lipulaeva video ja heli genereerimise mudel, mis märgib olulist hüpet
+                            füüsiliselt täpse ja realistliku video sisu loomisel.
+                        </p>
                     </div>
-
-                    <p>
-                        Kling 2.5 Turbo Pro on uusim kõrge jõudlusega AI videogeneratsiooni mudel Kling AI-lt Kuaishou poolt, mis on loodud kinemaatilise kvaliteediga videote loomiseks.
-                    </p>
-                </div>
-
-                <div class="tool-card">
-                    <h3>Wan 2.5</h3>
+                    <div class="tool-card request-card" data-category="Kunsti AI Tööriistad">
+                        <h3>Taotle tööriista lisamist</h3>
 
-                    <div class="tool-tags">
-                        <span class="tag">Video</span>
+                        <p class="request-subtitle">
+                            Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
+                        </p>
 
-                        <span class="tag">Content Creation</span>
-
-                        <span class="tag">Paid</span>
+                        <button class="request-trigger-btn">Saada</button>
                     </div>
-
-                    <p>
-                        Wan 2.5 on edasijõudnud AI-põhine videogeneraator, mis muudab teksti või pildid professionaalse kvaliteediga videoteks sisseehitatud sünkroniseeritud heliga.
-                    </p>
                 </div>
 
-                <div class="tool-card">
-                    <h3>Sora 2</h3>
+                <h2 class="category-title">Tutvumise AI Tööriistad</h2>
 
-                    <div class="tool-tags">
-                        <span class="tag">Video</span>
+                <div class="tools-grid dating-tools">
+                    <div class="tool-card">
+                        <h3>Character AI</h3>
 
-                        <span class="tag">Creative platform</span>
+                        <div class="tool-tags">
+                            <span class="tag">Chatbot</span>
 
-                        <span class="tag">Freemium</span>
-                    </div>
+                            <span class="tag">Entertainment</span>
 
-                    <p>
-                        Sora 2 on OpenAI uusim lipulaeva video ja heli genereerimise mudel, mis märgib olulist hüpet füüsiliselt täpse ja realistliku video sisu loomisel.
-                    </p>
-                </div>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                <div
-                    class="tool-card request-card"
-                    data-category="Video AI Tööriistad"
-                >
-                    <h3>Taotle tööriista lisamist</h3>
-
-                    <p class="request-subtitle">
-                        Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
-                    </p>
-
-                    <form class="request-form">
-                        <label>
-                            AI tööriista nimi
-
-                            <input
-                                name="toolName"
-                                placeholder="Nt: Midjourney, Claude, ..."
-                                required=""
-                                type="text"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Veebileht (valikuline)
-
-                            <input
-                                name="toolUrl"
-                                placeholder="https://..."
-                                type="url"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Märkus (valikuline)
-
-                            <textarea
-                                name="message"
-                                placeholder="Mida see tööriist teeb, miks lisada, lisainfo..."
-                                rows="3"
-                            ></textarea>
-                        </label>
-
-                        <button
-                            class="request-send"
-                            type="submit"
-                        >Saada</button>
-
-                        <div
-                            aria-live="polite"
-                            class="request-status"
-                        ></div>
-                    </form>
-                </div>
-            </div>
+                        <p>
+                            Character AI on interaktiivne platvorm, mis võimaldab kasutajatel luua, kohandada ja
+                            vestelda
+                            virtuaalsete karakteritega, mida juhivad edasijõudnud keelemudelid.
+                        </p>
+                    </div>
 
-            <h2 class="category-title">Tutvumise AI Tööriistad</h2>
+                    <div class="tool-card">
+                        <h3>JanitorAI</h3>
 
-            <div class="tools-grid dating-tools">
-                <div class="tool-card">
-                    <h3>Character AI</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Chatbot</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Chatbot</span>
+                            <span class="tag">Roleplay</span>
 
-                        <span class="tag">Entertainment</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Janitor AI on mitmekülgne chatbot platvorm, mis võimaldab kasutajatel suhelda mitmesuguse
+                            AI-genereeritud karakteritega, muutes selle populaarseks nii meelelahutuse kui ka
+                            produktiivsuse
+                            jaoks.
+                        </p>
                     </div>
 
-                    <p>
-                        Character AI on interaktiivne platvorm, mis võimaldab kasutajatel luua, kohandada ja vestelda virtuaalsete karakteritega, mida juhivad edasijõudnud keelemudelid.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>VirtualGF</h3>
 
-                <div class="tool-card">
-                    <h3>JanitorAI</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Dating</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Chatbot</span>
+                            <span class="tag">AI Companion</span>
 
-                        <span class="tag">Roleplay</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            VirtualGF on AI-põhine platvorm, mis on loodud kohandatavate virtuaalsete kaaslaste
+                            loomiseks,
+                            võimaldades kasutajatel osaleda tähendusrikkates ja isikupärastatud interaktsioonides.
+                        </p>
                     </div>
 
-                    <p>
-                        Janitor AI on mitmekülgne chatbot platvorm, mis võimaldab kasutajatel suhelda mitmesuguse AI-genereeritud karakteritega, muutes selle populaarseks nii meelelahutuse kui ka produktiivsuse jaoks.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Replika</h3>
 
-                <div class="tool-card">
-                    <h3>VirtualGF</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Chat</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Dating</span>
+                            <span class="tag">Dating</span>
 
-                        <span class="tag">AI Companion</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Tutvustame Replikat, AI kaaslast, kes on alati siin kuulama ja rääkima. Replika on AI
+                            chatbot,
+                            kes on innukas õppima ja nägema maailma su silmade läbi.
+                        </p>
                     </div>
 
-                    <p>
-                        VirtualGF on AI-põhine platvorm, mis on loodud kohandatavate virtuaalsete kaaslaste loomiseks, võimaldades kasutajatel osaleda tähendusrikkates ja isikupärastatud interaktsioonides.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Avtaar.ai</h3>
 
-                <div class="tool-card">
-                    <h3>Replika</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Chat</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Chat</span>
+                            <span class="tag">AI Avatar</span>
 
-                        <span class="tag">Dating</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Tere tulemast Avtaar.ai-sse - AI kaaslaste tippkohta. Me revolutsioneerime digimaailma oma
+                            kohandatud, hüperrealistlike 3D avataridega, kellega saad vestelda.
+                        </p>
                     </div>
 
-                    <p>
-                        Tutvustame Replikat, AI kaaslast, kes on alati siin kuulama ja rääkima. Replika on AI chatbot, kes on innukas õppima ja nägema maailma su silmade läbi.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Dittin AI</h3>
 
-                <div class="tool-card">
-                    <h3>Avtaar.ai</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Chat</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Chat</span>
+                            <span class="tag">Roleplay</span>
 
-                        <span class="tag">AI Avatar</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Dittin AI on interaktiivne platvorm, mis pakub kasutajatele ainulaadset kogemust,
+                            võimaldades
+                            neil osaleda piiramata vestlustes kohandatavate AI chatbottidega.
+                        </p>
                     </div>
 
-                    <p>
-                        Tere tulemast Avtaar.ai-sse - AI kaaslaste tippkohta. Me revolutsioneerime digimaailma oma kohandatud, hüperrealistlike 3D avataridega, kellega saad vestelda.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>YourMove</h3>
 
-                <div class="tool-card">
-                    <h3>Dittin AI</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Chat</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Chat</span>
+                            <span class="tag">Dating</span>
 
-                        <span class="tag">Roleplay</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            YourMove on AI-põhine tutvumisassistent, mis on loodud parandama veebitutvumise kogemust,
+                            aidates kasutajatel luua kaasahaaravaid profiile ja hõlbustades tähendusrikkaid vestlusi.
+                        </p>
                     </div>
 
-                    <p>
-                        Dittin AI on interaktiivne platvorm, mis pakub kasutajatele ainulaadset kogemust, võimaldades neil osaleda piiramata vestlustes kohandatavate AI chatbottidega.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>CraveU AI</h3>
 
-                <div class="tool-card">
-                    <h3>YourMove</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Chat</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Chat</span>
+                            <span class="tag">Adult</span>
 
-                        <span class="tag">Dating</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            CraveU AI on spetsialiseeritud AI chatbot platvorm, mis pakub kasutajatele piiramata NSFW
+                            vestluskogemusi ja isikupärastatud interaktsioone.
+                        </p>
                     </div>
 
-                    <p>
-                        YourMove on AI-põhine tutvumisassistent, mis on loodud parandama veebitutvumise kogemust, aidates kasutajatel luua kaasahaaravaid profiile ja hõlbustades tähendusrikkaid vestlusi.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>makebelieve</h3>
 
-                <div class="tool-card">
-                    <h3>CraveU AI</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Health</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Chat</span>
+                            <span class="tag">Mental Wellness</span>
 
-                        <span class="tag">Adult</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Makebelieve on digitaalne kaaslase platvorm, mis on loodud parandamaks vaimset heaolu
+                            interaktiivsete vestluste kaudu. See pakub kahte erinevat AI kaaslast.
+                        </p>
                     </div>
-
-                    <p>
-                        CraveU AI on spetsialiseeritud AI chatbot platvorm, mis pakub kasutajatele piiramata NSFW vestluskogemusi ja isikupärastatud interaktsioone.
-                    </p>
-                </div>
-
-                <div class="tool-card">
-                    <h3>makebelieve</h3>
 
-                    <div class="tool-tags">
-                        <span class="tag">Health</span>
+                    <div class="tool-card request-card" data-category="Kunsti AI Tööriistad">
+                        <h3>Taotle tööriista lisamist</h3>
 
-                        <span class="tag">Mental Wellness</span>
+                        <p class="request-subtitle">
+                            Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
+                        </p>
 
-                        <span class="tag">Free</span>
+                        <button class="request-trigger-btn">Saada</button>
                     </div>
-
-                    <p>
-                        Makebelieve on digitaalne kaaslase platvorm, mis on loodud parandamaks vaimset heaolu interaktiivsete vestluste kaudu. See pakub kahte erinevat AI kaaslast.
-                    </p>
                 </div>
 
-                <div
-                    class="tool-card request-card"
-                    data-category="Tutvumise AI Tööriistad"
-                >
-                    <h3>Taotle tööriista lisamist</h3>
-
-                    <p class="request-subtitle">
-                        Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
-                    </p>
-
-                    <form class="request-form">
-                        <label>
-                            AI tööriista nimi
-
-                            <input
-                                name="toolName"
-                                placeholder="Nt: Midjourney, Claude, ..."
-                                required=""
-                                type="text"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Veebileht (valikuline)
-
-                            <input
-                                name="toolUrl"
-                                placeholder="https://..."
-                                type="url"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Märkus (valikuline)
-
-                            <textarea
-                                name="message"
-                                placeholder="Mida see tööriist teeb, miks lisada, lisainfo..."
-                                rows="3"
-                            ></textarea>
-                        </label>
-
-                        <button
-                            class="request-send"
-                            type="submit"
-                        >Saada</button>
-
-                        <div
-                            aria-live="polite"
-                            class="request-status"
-                        ></div>
-                    </form>
-                </div>
-            </div>
+                <h2 class="category-title">Investeerimise AI Tööriistad</h2>
 
-            <h2 class="category-title">Investeerimise AI Tööriistad</h2>
+                <div class="tools-grid investing-tools">
+                    <div class="tool-card">
+                        <h3>MagicVest</h3>
 
-            <div class="tools-grid investing-tools">
-                <div class="tool-card">
-                    <h3>MagicVest</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Crypto</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Crypto</span>
+                            <span class="tag">Investing</span>
 
-                        <span class="tag">Investing</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            MagicVest on tipptasemel krüpto intelligentsi tööriist, mis on loodud andma investoritele
+                            jõudu
+                            memecoin'ide volatiilses maailmas. See kasutab tehisintellekti jõudu ennustamiseks.
+                        </p>
                     </div>
 
-                    <p>
-                        MagicVest on tipptasemel krüpto intelligentsi tööriist, mis on loodud andma investoritele jõudu memecoin'ide volatiilses maailmas. See kasutab tehisintellekti jõudu ennustamiseks.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Edge Hound</h3>
 
-                <div class="tool-card">
-                    <h3>Edge Hound</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Investing</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Investing</span>
+                            <span class="tag">Market Research</span>
 
-                        <span class="tag">Market Research</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Edge Hound pakub institutsionaalse taseme investeerimisuuringuid ja analüüse otse
+                            jaeinvestoritele läbi keeruka, kuid lihtsustatud liidese.
+                        </p>
                     </div>
 
-                    <p>
-                        Edge Hound pakub institutsionaalse taseme investeerimisuuringuid ja analüüse otse jaeinvestoritele läbi keeruka, kuid lihtsustatud liidese.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>StockGPT</h3>
 
-                <div class="tool-card">
-                    <h3>StockGPT</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Finance</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Finance</span>
+                            <span class="tag">Analysis</span>
 
-                        <span class="tag">Analysis</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            Tutvustame StockGPT-d, teie AI-põhist finantsteaduse assistenti. StockGPT abil saate
+                            hõlpsalt
+                            analüüsida ettevõtteid ja turge, kasutades AI tehnoloogiat.
+                        </p>
                     </div>
 
-                    <p>
-                        Tutvustame StockGPT-d, teie AI-põhist finantsteaduse assistenti. StockGPT abil saate hõlpsalt analüüsida ettevõtteid ja turge, kasutades AI tehnoloogiat.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Avanzai</h3>
 
-                <div class="tool-card">
-                    <h3>Avanzai</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Finance</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Finance</span>
+                            <span class="tag">Analysis</span>
 
-                        <span class="tag">Analysis</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            Avanzai on AI-põhine platvorm, mis on loodud sujuvdama finantsandmete analüüsi, võimaldades
+                            kasutajatel luua tootmisvalmis Python koodi loomulike keele abil.
+                        </p>
                     </div>
 
-                    <p>
-                        Avanzai on AI-põhine platvorm, mis on loodud sujuvdama finantsandmete analüüsi, võimaldades kasutajatel luua tootmisvalmis Python koodi loomulike keele abil.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Incite AI</h3>
 
-                <div class="tool-card">
-                    <h3>Incite AI</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Finance</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Finance</span>
+                            <span class="tag">Trading</span>
 
-                        <span class="tag">Trading</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            Incite AI on edasijõudnud tehisintellekti platvorm, mis on loodud pakkuma finantsteadmusi
+                            aktsia- ja krüptovaluuta kauplemiseks. Incite AI südames on selle võimekus.
+                        </p>
                     </div>
 
-                    <p>
-                        Incite AI on edasijõudnud tehisintellekti platvorm, mis on loodud pakkuma finantsteadmusi aktsia- ja krüptovaluuta kauplemiseks. Incite AI südames on selle võimekus.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>BeeBeeAI</h3>
 
-                <div class="tool-card">
-                    <h3>BeeBeeAI</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Finance</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Finance</span>
+                            <span class="tag">Reports</span>
 
-                        <span class="tag">Reports</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            BeeBeeAI on spetsialiseeritud AI platvorm, mis on loodud sujuvdama avalike ettevõtete
+                            finantsaruannete ja tuluaruannete analüüsi.
+                        </p>
                     </div>
 
-                    <p>
-                        BeeBeeAI on spetsialiseeritud AI platvorm, mis on loodud sujuvdama avalike ettevõtete finantsaruannete ja tuluaruannete analüüsi.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Fynt</h3>
 
-                <div class="tool-card">
-                    <h3>Fynt</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Finance</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Finance</span>
+                            <span class="tag">Controller</span>
 
-                        <span class="tag">Controller</span>
+                            <span class="tag">Premium</span>
+                        </div>
 
-                        <span class="tag">Premium</span>
+                        <p>
+                            Fynt on AI-põhine finantskontroller, mis on loodud sujuvdama ja automatiseerima
+                            finantstegevusi
+                            ettevõtete jaoks. See edasijõudnud platvorm ühendab erinevaid finantsandmeid.
+                        </p>
                     </div>
 
-                    <p>
-                        Fynt on AI-põhine finantskontroller, mis on loodud sujuvdama ja automatiseerima finantstegevusi ettevõtete jaoks. See edasijõudnud platvorm ühendab erinevaid finantsandmeid.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Tradt</h3>
 
-                <div class="tool-card">
-                    <h3>Tradt</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Finance</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Finance</span>
+                            <span class="tag">Trading</span>
 
-                        <span class="tag">Trading</span>
+                            <span class="tag">Premium</span>
+                        </div>
 
-                        <span class="tag">Premium</span>
+                        <p>
+                            Tradt on terviklik AI-põhine kauplemisplatvorm, mis on kohandatud krüptovaluuta
+                            kauplejatele.
+                            See keskendub edasijõudnud signaalianalüüsi tööriistade pakkumisele.
+                        </p>
                     </div>
 
-                    <p>
-                        Tradt on terviklik AI-põhine kauplemisplatvorm, mis on kohandatud krüptovaluuta kauplejatele. See keskendub edasijõudnud signaalianalüüsi tööriistade pakkumisele.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>hoopsAI</h3>
 
-                <div class="tool-card">
-                    <h3>hoopsAI</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Finance</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Finance</span>
+                            <span class="tag">Stock Market</span>
 
-                        <span class="tag">Stock Market</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            HoopsAI on AI-põhine platvorm, mis on loodud andma jaeinvestoritele jõudu, pakkudes
+                            isikupärastatud teadmisi ja tööriistu aktsiaturu navigeerimiseks.
+                        </p>
                     </div>
 
-                    <p>
-                        HoopsAI on AI-põhine platvorm, mis on loodud andma jaeinvestoritele jõudu, pakkudes isikupärastatud teadmisi ja tööriistu aktsiaturu navigeerimiseks.
-                    </p>
-                </div>
+                    <div class="tool-card request-card" data-category="Kunsti AI Tööriistad">
+                        <h3>Taotle tööriista lisamist</h3>
 
-                <div
-                    class="tool-card request-card"
-                    data-category="Investeerimise AI Tööriistad"
-                >
-                    <h3>Taotle tööriista lisamist</h3>
-
-                    <p class="request-subtitle">
-                        Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
-                    </p>
-
-                    <form class="request-form">
-                        <label>
-                            AI tööriista nimi
-
-                            <input
-                                name="toolName"
-                                placeholder="Nt: Midjourney, Claude, ..."
-                                required=""
-                                type="text"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Veebileht (valikuline)
-
-                            <input
-                                name="toolUrl"
-                                placeholder="https://..."
-                                type="url"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Märkus (valikuline)
-
-                            <textarea
-                                name="message"
-                                placeholder="Mida see tööriist teeb, miks lisada, lisainfo..."
-                                rows="3"
-                            ></textarea>
-                        </label>
-
-                        <button
-                            class="request-send"
-                            type="submit"
-                        >Saada</button>
-
-                        <div
-                            aria-live="polite"
-                            class="request-status"
-                        ></div>
-                    </form>
+                        <p class="request-subtitle">
+                            Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
+                        </p>
+
+                        <button class="request-trigger-btn">Saada</button>
+                    </div>
                 </div>
-            </div>
 
-            <h2 class="category-title">Kõne AI Tööriistad</h2>
+                <h2 class="category-title">Kõne AI Tööriistad</h2>
 
-            <div class="tools-grid speech-tools">
-                <div class="tool-card">
-                    <h3>IndexTTS 2</h3>
+                <div class="tools-grid speech-tools">
+                    <div class="tool-card">
+                        <h3>IndexTTS 2</h3>
 
-                    <div class="tool-tags">
-                        <span class="tag">Speech</span>
+                        <div class="tool-tags">
+                            <span class="tag">Speech</span>
 
-                        <span class="tag">Text-to-Speech</span>
+                            <span class="tag">Text-to-Speech</span>
 
-                        <span class="tag">Free</span>
+                            <span class="tag">Free</span>
+                        </div>
+
+                        <p>
+                            IndexTTS2 on tööstustaseme kontrollitav ja tõhus zero-shot tekst-kõne süsteem, mis pakub
+                            läbimurret emotsionaalselt ekspressiivsetes kõnesünteesis.
+                        </p>
                     </div>
 
-                    <p>
-                        IndexTTS2 on tööstustaseme kontrollitav ja tõhus zero-shot tekst-kõne süsteem, mis pakub läbimurret emotsionaalselt ekspressiivsetes kõnesünteesis.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>F5-TTS</h3>
 
-                <div class="tool-card">
-                    <h3>F5-TTS</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Speech</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Speech</span>
+                            <span class="tag">Voice Synthesis</span>
 
-                        <span class="tag">Voice Synthesis</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            F5-TTS on tipptasemel avatud lähtekoodiga tekst-kõne platvorm, mis on loodud pakkuma väga
+                            loomulikku, ekspressiivset ja tugevat kõnesünteesi.
+                        </p>
                     </div>
 
-                    <p>
-                        F5-TTS on tipptasemel avatud lähtekoodiga tekst-kõne platvorm, mis on loodud pakkuma väga loomulikku, ekspressiivset ja tugevat kõnesünteesi.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>RVC Voice Conversion</h3>
 
-                <div class="tool-card">
-                    <h3>RVC Voice Conversion</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Speech</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Speech</span>
+                            <span class="tag">Voice Conversion</span>
 
-                        <span class="tag">Voice Conversion</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            Retrieval-based Voice Conversion WebUI on võimas avatud lähtekoodiga platvorm reaalajas
+                            hääle
+                            teisendamiseks ja hääle kloonimiseks.
+                        </p>
                     </div>
 
-                    <p>
-                        Retrieval-based Voice Conversion WebUI on võimas avatud lähtekoodiga platvorm reaalajas hääle teisendamiseks ja hääle kloonimiseks.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Dia by Nari</h3>
 
-                <div class="tool-card">
-                    <h3>Dia by Nari</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Audio</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Audio</span>
+                            <span class="tag">Speech Synthesis</span>
 
-                        <span class="tag">Speech Synthesis</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            Dia on revolutsiooniline avatud lähtekoodiga tekst-kõne mudel Nari Labs'ilt, mis genereerib
+                            väga
+                            realistlikku, emotsionaalselt rikast dialoogi tavatekstist.
+                        </p>
                     </div>
 
-                    <p>
-                        Dia on revolutsiooniline avatud lähtekoodiga tekst-kõne mudel Nari Labs'ilt, mis genereerib väga realistlikku, emotsionaalselt rikast dialoogi tavatekstist.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>W-Okada Voice Changer</h3>
 
-                <div class="tool-card">
-                    <h3>W-Okada Voice Changer</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Audio</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Audio</span>
+                            <span class="tag">Voice Changer</span>
 
-                        <span class="tag">Voice Changer</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            W-Okada Voice Changer on võimas avatud lähtekoodiga reaalajas hääle teisendamise tarkvara,
+                            mis
+                            võimaldab kasutajatel muuta oma häält reaalajas.
+                        </p>
                     </div>
 
-                    <p>
-                        W-Okada Voice Changer on võimas avatud lähtekoodiga reaalajas hääle teisendamise tarkvara, mis võimaldab kasutajatel muuta oma häält reaalajas.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Kits AI</h3>
 
-                <div class="tool-card">
-                    <h3>Kits AI</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Music</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Music</span>
+                            <span class="tag">Audio Production</span>
 
-                        <span class="tag">Audio Production</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Kits AI on edasijõudnud muusikatootmise platvorm, mis on loodud muusikutele, produtsendile
+                            ja
+                            heliloojatele stuudiokvaliteediga vokaal- ja instrumentaaltööriistade pakkumiseks.
+                        </p>
                     </div>
 
-                    <p>
-                        Kits AI on edasijõudnud muusikatootmise platvorm, mis on loodud muusikutele, produtsendile ja heliloojatele stuudiokvaliteediga vokaal- ja instrumentaaltööriistade pakkumiseks.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Chatterbox</h3>
 
-                <div class="tool-card">
-                    <h3>Chatterbox</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Speech</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Speech</span>
+                            <span class="tag">Voice Synthesis</span>
 
-                        <span class="tag">Voice Synthesis</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            Chatterbox on edasijõudnud avatud lähtekoodiga tekst-kõne mudel Resemble AI-lt, mis pakub
+                            tipptasemel häälesünteesi ja hääle kloonimise võimalusi.
+                        </p>
                     </div>
 
-                    <p>
-                        Chatterbox on edasijõudnud avatud lähtekoodiga tekst-kõne mudel Resemble AI-lt, mis pakub tipptasemel häälesünteesi ja hääle kloonimise võimalusi.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Eleven Labs</h3>
 
-                <div class="tool-card">
-                    <h3>Eleven Labs</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Audio</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Audio</span>
+                            <span class="tag">Voice Synthesis</span>
 
-                        <span class="tag">Voice Synthesis</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            ElevenLabs on juhtiv tekst-kõne platvorm, mis pakub ülirealistlikku, emotsionaalselt
+                            ekspressiivset kõnesünteesi üle 32 keeles.
+                        </p>
                     </div>
 
-                    <p>
-                        ElevenLabs on juhtiv tekst-kõne platvorm, mis pakub ülirealistlikku, emotsionaalselt ekspressiivset kõnesünteesi üle 32 keeles.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Verbatik</h3>
 
-                <div class="tool-card">
-                    <h3>Verbatik</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Audio</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Audio</span>
+                            <span class="tag">Voice Cloning</span>
 
-                        <span class="tag">Voice Cloning</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Verbatik on tugev tekst-kõne ja hääle kloonimise platvorm, mis muudab kirjaliku sisu väga
+                            realistlikuks, loomulikult kõlavaks helifailiks.
+                        </p>
                     </div>
 
-                    <p>
-                        Verbatik on tugev tekst-kõne ja hääle kloonimise platvorm, mis muudab kirjaliku sisu väga realistlikuks, loomulikult kõlavaks helifailiks.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Adobe Speech Enhancer</h3>
 
-                <div class="tool-card">
-                    <h3>Adobe Speech Enhancer</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Audio</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Audio</span>
+                            <span class="tag">Podcasting</span>
 
-                        <span class="tag">Podcasting</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Adobe Podcast: Enhance on brauseripõhine heli parandamise tööriist, mis muudab tavalised
+                            häälesalvestused stuudiokvaliteediga helifailideks.
+                        </p>
                     </div>
 
-                    <p>
-                        Adobe Podcast: Enhance on brauseripõhine heli parandamise tööriist, mis muudab tavalised häälesalvestused stuudiokvaliteediga helifailideks.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Hugging Face</h3>
 
-                <div class="tool-card">
-                    <h3>Hugging Face</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Development</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Development</span>
+                            <span class="tag">Machine Learning</span>
 
-                        <span class="tag">Machine Learning</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Hugging Face on terviklik platvorm, mis toimib masinõppe mudelite, andmekogude ja
+                            koostöötööriistade keskse keskusena.
+                        </p>
                     </div>
 
-                    <p>
-                        Hugging Face on terviklik platvorm, mis toimib masinõppe mudelite, andmekogude ja koostöötööriistade keskse keskusena.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>AI HUB Discord</h3>
 
-                <div class="tool-card">
-                    <h3>AI HUB Discord</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Community</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Community</span>
+                            <span class="tag">Tech Discussion</span>
 
-                        <span class="tag">Tech Discussion</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            AI Hub on dünaamiline Discord kogukond, mis koondab tehisintellekti ja selle rakenduste
+                            vastu
+                            huvi tundvaid entusiaste, professionaale ja loojaid.
+                        </p>
                     </div>
 
-                    <p>
-                        AI Hub on dünaamiline Discord kogukond, mis koondab tehisintellekti ja selle rakenduste vastu huvi tundvaid entusiaste, professionaale ja loojaid.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Fliki</h3>
 
-                <div class="tool-card">
-                    <h3>Fliki</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Video</span>
+                            <span class="tag">Content Creation</span>
 
-                        <span class="tag">Content Creation</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Fliki on terviklik veebipõhine platvorm, mis võimaldab kasutajatel hõlpsalt teisendada
+                            teksti
+                            kõrgekvaliteediliseks video- ja helisisuks.
+                        </p>
                     </div>
 
-                    <p>
-                        Fliki on terviklik veebipõhine platvorm, mis võimaldab kasutajatel hõlpsalt teisendada teksti kõrgekvaliteediliseks video- ja helisisuks.
-                    </p>
-                </div>
+                    <div class="tool-card request-card" data-category="Kunsti AI Tööriistad">
+                        <h3>Taotle tööriista lisamist</h3>
+
+                        <p class="request-subtitle">
+                            Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
+                        </p>
 
-                <div
-                    class="tool-card request-card"
-                    data-category="Kõne AI Tööriistad"
-                >
-                    <h3>Taotle tööriista lisamist</h3>
-
-                    <p class="request-subtitle">
-                        Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
-                    </p>
-
-                    <form class="request-form">
-                        <label>
-                            AI tööriista nimi
-
-                            <input
-                                name="toolName"
-                                placeholder="Nt: Midjourney, Claude, ..."
-                                required=""
-                                type="text"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Veebileht (valikuline)
-
-                            <input
-                                name="toolUrl"
-                                placeholder="https://..."
-                                type="url"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Märkus (valikuline)
-
-                            <textarea
-                                name="message"
-                                placeholder="Mida see tööriist teeb, miks lisada, lisainfo..."
-                                rows="3"
-                            ></textarea>
-                        </label>
-
-                        <button
-                            class="request-send"
-                            type="submit"
-                        >Saada</button>
-
-                        <div
-                            aria-live="polite"
-                            class="request-status"
-                        ></div>
-                    </form>
+                        <button class="request-trigger-btn">Saada</button>
+                    </div>
                 </div>
-            </div>
+
+                <h2 class="category-title">Chatbot AI Tööriistad</h2>
 
-            <h2 class="category-title">Chatbot AI Tööriistad</h2>
+                <div class="tools-grid chatbot-tools">
+                    <div class="tool-card">
+                        <h3>Monica</h3>
 
-            <div class="tools-grid chatbot-tools">
-                <div class="tool-card">
-                    <h3>Monica</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Productivity</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Productivity</span>
+                            <span class="tag">LLM</span>
 
-                        <span class="tag">LLM</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Monica AI on kõik-ühes digitaalne assistent, mis kasutab edasijõudnud AI mudeleid nagu GPT,
+                            Gemini ja DeepSeek, pakkudes terviklikku produktiivsustööriistade komplekti.
+                        </p>
                     </div>
 
-                    <p>
-                        Monica AI on kõik-ühes digitaalne assistent, mis kasutab edasijõudnud AI mudeleid nagu GPT, Gemini ja DeepSeek, pakkudes terviklikku produktiivsustööriistade komplekti.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Manus</h3>
 
-                <div class="tool-card">
-                    <h3>Manus</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Productivity</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Productivity</span>
+                            <span class="tag">Automation</span>
 
-                        <span class="tag">Automation</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Manus AI on autonoomne agendi platvorm, mis on loodud täitmaks keerukaid mitmesammu
+                            ülesandeid
+                            minimaalsete inimsekkumistega.
+                        </p>
                     </div>
 
-                    <p>
-                        Manus AI on autonoomne agendi platvorm, mis on loodud täitmaks keerukaid mitmesammu ülesandeid minimaalsete inimsekkumistega.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Dealism</h3>
 
-                <div class="tool-card">
-                    <h3>Dealism</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Sales</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Sales</span>
+                            <span class="tag">Chat</span>
 
-                        <span class="tag">Chat</span>
+                            <span class="tag">Automation</span>
 
-                        <span class="tag">Automation</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Dealism on maailma esimene vibe müügiagent, mis integreerib sügavalt WhatsApp Businessiga,
+                            pakkudes automatiseeritud ja isikupärastatud vestluskogemusi.
+                        </p>
                     </div>
 
-                    <p>
-                        Dealism on maailma esimene vibe müügiagent, mis integreerib sügavalt WhatsApp Businessiga, pakkudes automatiseeritud ja isikupärastatud vestluskogemusi.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Splutter AI</h3>
 
-                <div class="tool-card">
-                    <h3>Splutter AI</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Business</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Business</span>
+                            <span class="tag">Customer Service</span>
+                        </div>
 
-                        <span class="tag">Customer Service</span>
+                        <p>
+                            Splutter AI on mitmekülgne chatbot platvorm, mis on loodud parandamaks klienditeenindust,
+                            turundust ja müügi töövoogusid. Võimaldab luua täielikult kohandatavaid chatbote.
+                        </p>
                     </div>
 
-                    <p>
-                        Splutter AI on mitmekülgne chatbot platvorm, mis on loodud parandamaks klienditeenindust, turundust ja müügi töövoogusid. Võimaldab luua täielikult kohandatavaid chatbote.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>OpenAI Operator</h3>
 
-                <div class="tool-card">
-                    <h3>OpenAI Operator</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Agent</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Agent</span>
+                            <span class="tag">Workflow Automation</span>
+                        </div>
 
-                        <span class="tag">Workflow Automation</span>
+                        <p>
+                            ChatGPT Operator on edasijõudnud automatiseerimistööriist, mis muudab ChatGPT proaktiivseks
+                            digitaalseks assistendiks, mis suudab teostada reaalseid ülesandeid veebilehtedel ja
+                            rakendustes.
+                        </p>
                     </div>
 
-                    <p>
-                        ChatGPT Operator on edasijõudnud automatiseerimistööriist, mis muudab ChatGPT proaktiivseks digitaalseks assistendiks, mis suudab teostada reaalseid ülesandeid veebilehtedel ja rakendustes.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>BrainyBear</h3>
 
-                <div class="tool-card">
-                    <h3>BrainyBear</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Agent</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Agent</span>
+                            <span class="tag">Customer Support</span>
+                        </div>
 
-                        <span class="tag">Customer Support</span>
+                        <p>
+                            BrainyBear on keerukas chatbot platvorm, mis on loodud automatiseerima kliendituge läbi
+                            intelligentsete vestlusagentide, kes õpivad ja kohanevad aja jooksul.
+                        </p>
                     </div>
 
-                    <p>
-                        BrainyBear on keerukas chatbot platvorm, mis on loodud automatiseerima kliendituge läbi intelligentsete vestlusagentide, kes õpivad ja kohanevad aja jooksul.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Hexoloop</h3>
 
-                <div class="tool-card">
-                    <h3>Hexoloop</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Business</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Business</span>
+                            <span class="tag">Customer Support</span>
+                        </div>
 
-                        <span class="tag">Customer Support</span>
+                        <p>
+                            Hexoloop defineerib klienditoe uuesti läbi autonoomsete AI agentide, kes suudavad lahendada
+                            päringuid ilma inimsekkumiseta, pakkudes lahendusi alla 90 sekundi jooksul.
+                        </p>
                     </div>
 
-                    <p>
-                        Hexoloop defineerib klienditoe uuesti läbi autonoomsete AI agentide, kes suudavad lahendada päringuid ilma inimsekkumiseta, pakkudes lahendusi alla 90 sekundi jooksul.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>MyPersonas</h3>
 
-                <div class="tool-card">
-                    <h3>MyPersonas</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Knowledge</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Knowledge</span>
+                            <span class="tag">Expertise</span>
 
-                        <span class="tag">Expertise</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            MyPersonas revolutsioonilisustab teadmiste haldamist, luues elutruud, AI-põhised digitaalsed
+                            kloonid teie ettevõtte ekspertidest. Need ei ole lihtsad chatbotid, vaid täiuslikud koopiad.
+                        </p>
                     </div>
 
-                    <p>
-                        MyPersonas revolutsioonilisustab teadmiste haldamist, luues elutruud, AI-põhised digitaalsed kloonid teie ettevõtte ekspertidest. Need ei ole lihtsad chatbotid, vaid täiuslikud koopiad.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>RoboWork</h3>
 
-                <div class="tool-card">
-                    <h3>RoboWork</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Automation</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Automation</span>
+                            <span class="tag">Workflow</span>
 
-                        <span class="tag">Workflow</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            RoboWork on võimas platvorm, mis võimaldab ettevõtetel luua ja juurutada AI agente ning
+                            mitme-agendi töövoogusid ilma kodeerimiseta.
+                        </p>
                     </div>
 
-                    <p>
-                        RoboWork on võimas platvorm, mis võimaldab ettevõtetel luua ja juurutada AI agente ning mitme-agendi töövoogusid ilma kodeerimiseta.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>InboxPilot</h3>
 
-                <div class="tool-card">
-                    <h3>InboxPilot</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Writing</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Writing</span>
+                            <span class="tag">Workflow Automation</span>
+                        </div>
 
-                        <span class="tag">Workflow Automation</span>
+                        <p>
+                            InboxPilot sujuvdab e-posti haldamist läbi intelligentse automatiseerimise, võimaldades
+                            ettevõtetel käsitleda suure mahuga töövoogusid täpsusega.
+                        </p>
                     </div>
 
-                    <p>
-                        InboxPilot sujuvdab e-posti haldamist läbi intelligentse automatiseerimise, võimaldades ettevõtetel käsitleda suure mahuga töövoogusid täpsusega.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Qwen3</h3>
 
-                <div class="tool-card">
-                    <h3>Qwen3</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Language</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Language</span>
+                            <span class="tag">Multilingual</span>
 
-                        <span class="tag">Multilingual</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            Qwen3 on Alibaba Groupi välja töötatud uusim suurte keelemudelite põlvkond, mille eesmärk on
+                            pakkuda erakordset jõudlust laia valiku arutlus- ja keeleülesannete puhul.
+                        </p>
                     </div>
 
-                    <p>
-                        Qwen3 on Alibaba Groupi välja töötatud uusim suurte keelemudelite põlvkond, mille eesmärk on pakkuda erakordset jõudlust laia valiku arutlus- ja keeleülesannete puhul.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>BAGEL</h3>
 
-                <div class="tool-card">
-                    <h3>BAGEL</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Multimodal</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Multimodal</span>
+                            <span class="tag">Natural Language Processing</span>
 
-                        <span class="tag">Natural Language Processing</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            BAGEL on ühtne multimodaalne mudel, mis suudab töödelda ja mõista mitut andmevormi,
+                            sealhulgas
+                            teksti, pilte ja helifaile.
+                        </p>
                     </div>
 
-                    <p>
-                        BAGEL on ühtne multimodaalne mudel, mis suudab töödelda ja mõista mitut andmevormi, sealhulgas teksti, pilte ja helifaile.
-                    </p>
-                </div>
+                    <div class="tool-card request-card" data-category="Kunsti AI Tööriistad">
+                        <h3>Taotle tööriista lisamist</h3>
+
+                        <p class="request-subtitle">
+                            Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
+                        </p>
 
-                <div
-                    class="tool-card request-card"
-                    data-category="Chatbot AI Tööriistad"
-                >
-                    <h3>Taotle tööriista lisamist</h3>
-
-                    <p class="request-subtitle">
-                        Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
-                    </p>
-
-                    <form class="request-form">
-                        <label>
-                            AI tööriista nimi
-
-                            <input
-                                name="toolName"
-                                placeholder="Nt: Midjourney, Claude, ..."
-                                required=""
-                                type="text"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Veebileht (valikuline)
-
-                            <input
-                                name="toolUrl"
-                                placeholder="https://..."
-                                type="url"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Märkus (valikuline)
-
-                            <textarea
-                                name="message"
-                                placeholder="Mida see tööriist teeb, miks lisada, lisainfo..."
-                                rows="3"
-                            ></textarea>
-                        </label>
-
-                        <button
-                            class="request-send"
-                            type="submit"
-                        >Saada</button>
-
-                        <div
-                            aria-live="polite"
-                            class="request-status"
-                        ></div>
-                    </form>
+                        <button class="request-trigger-btn">Saada</button>
+                    </div>
                 </div>
-            </div>
+
+                <h2 class="category-title">E-kaubanduse AI Tööriistad</h2>
 
-            <h2 class="category-title">E-kaubanduse AI Tööriistad</h2>
+                <div class="tools-grid ecommerce-tools">
+                    <div class="tool-card">
+                        <h3>Shopify Magic</h3>
 
-            <div class="tools-grid ecommerce-tools">
-                <div class="tool-card">
-                    <h3>Shopify Magic</h3>
+                        <div class="tool-tags">
+                            <span class="tag">E-commerce</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">E-commerce</span>
+                            <span class="tag">Product Description</span>
 
-                        <span class="tag">Product Description</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Shopify Magic on AI-põhine tööriist, mis aitab e-poe omanikkel kiiresti luua tooteid müüvaid
+                            kirjeldusi ja sisu.
+                        </p>
                     </div>
 
-                    <p>
-                        Shopify Magic on AI-põhine tööriist, mis aitab e-poe omanikkel kiiresti luua tooteid müüvaid kirjeldusi ja sisu.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Copy.ai</h3>
 
-                <div class="tool-card">
-                    <h3>Copy.ai</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Copywriting</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Copywriting</span>
+                            <span class="tag">Marketing</span>
 
-                        <span class="tag">Marketing</span>
+                            <span class="tag">Freemium</span>
+                        </div>
 
-                        <span class="tag">Freemium</span>
+                        <p>
+                            Copy.ai aitab luua e-kaubanduse jaoks konverteerivat sisu, alates tootekirjeldustest kuni
+                            e-posti kampaaniateni.
+                        </p>
                     </div>
 
-                    <p>
-                        Copy.ai aitab luua e-kaubanduse jaoks konverteerivat sisu, alates tootekirjeldustest kuni e-posti kampaaniateni.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Jasper</h3>
 
-                <div class="tool-card">
-                    <h3>Jasper</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Content Creation</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Content Creation</span>
+                            <span class="tag">Marketing</span>
 
-                        <span class="tag">Marketing</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Jasper on võimas AI kirjutamisassistent, mis aitab luua kvaliteetset turundussisu
+                            e-kaubanduse
+                            tarbeks.
+                        </p>
                     </div>
 
-                    <p>
-                        Jasper on võimas AI kirjutamisassistent, mis aitab luua kvaliteetset turundussisu e-kaubanduse tarbeks.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Aidaptive</h3>
 
-                <div class="tool-card">
-                    <h3>Aidaptive</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Personalization</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Personalization</span>
+                            <span class="tag">Predictions</span>
 
-                        <span class="tag">Predictions</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Aidaptive kasutab ennustavat AI-d, et isikupärastada ostukogemusi ja suurendada
+                            konversioonimäärasid.
+                        </p>
                     </div>
 
-                    <p>
-                        Aidaptive kasutab ennustavat AI-d, et isikupärastada ostukogemusi ja suurendada konversioonimäärasid.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Prisync</h3>
 
-                <div class="tool-card">
-                    <h3>Prisync</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Price Monitoring</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Price Monitoring</span>
+                            <span class="tag">Competition</span>
 
-                        <span class="tag">Competition</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Prisync jälgib konkurentide hindu ja aitab optimeerida oma hinnastrateegiat dünaamiliselt.
+                        </p>
                     </div>
 
-                    <p>
-                        Prisync jälgib konkurentide hindu ja aitab optimeerida oma hinnastrateegiat dünaamiliselt.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Phrasee</h3>
 
-                <div class="tool-card">
-                    <h3>Phrasee</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Marketing</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Marketing</span>
+                            <span class="tag">Language</span>
 
-                        <span class="tag">Language</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Phrasee genereerib brändi häält vastavat turunduskeelt, mis resoneerub sihtauditooriumiga.
+                        </p>
                     </div>
 
-                    <p>
-                        Phrasee genereerib brändi häält vastavat turunduskeelt, mis resoneerub sihtauditooriumiga.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Clerk.io</h3>
 
-                <div class="tool-card">
-                    <h3>Clerk.io</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Personalization</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Personalization</span>
+                            <span class="tag">Search</span>
 
-                        <span class="tag">Search</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Clerk.io pakub AI-põhist otsingut ja isikupärastatud tootesoovitusi e-poodidele.
+                        </p>
                     </div>
 
-                    <p>
-                        Clerk.io pakub AI-põhist otsingut ja isikupärastatud tootesoovitusi e-poodidele.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Octane AI</h3>
 
-                <div class="tool-card">
-                    <h3>Octane AI</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Quiz</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Quiz</span>
+                            <span class="tag">Customer Engagement</span>
 
-                        <span class="tag">Customer Engagement</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Octane AI loob interaktiivseid viktoriine ja isikupärastatud ostukogemusi Shopify poodidele.
+                        </p>
                     </div>
 
-                    <p>
-                        Octane AI loob interaktiivseid viktoriine ja isikupärastatud ostukogemusi Shopify poodidele.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Klevu</h3>
 
-                <div class="tool-card">
-                    <h3>Klevu</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Search</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Search</span>
+                            <span class="tag">Discovery</span>
 
-                        <span class="tag">Discovery</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Klevu on AI-põhine otsingu- ja tooteavastuslahendus, mis parandab ostukogemust e-poodides.
+                        </p>
                     </div>
 
-                    <p>
-                        Klevu on AI-põhine otsingu- ja tooteavastuslahendus, mis parandab ostukogemust e-poodides.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Vue.ai</h3>
 
-                <div class="tool-card">
-                    <h3>Vue.ai</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Automation</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Automation</span>
+                            <span class="tag">Cataloging</span>
 
-                        <span class="tag">Cataloging</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Vue.ai automatiseerib tootekataloogide haldamist ja optimeerib tootekirjeldusi ning pilte.
+                        </p>
                     </div>
 
-                    <p>
-                        Vue.ai automatiseerib tootekataloogide haldamist ja optimeerib tootekirjeldusi ning pilte.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Nosto</h3>
 
-                <div class="tool-card">
-                    <h3>Nosto</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Personalization</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Personalization</span>
+                            <span class="tag">Commerce</span>
 
-                        <span class="tag">Commerce</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Nosto pakub intelligentset isikupärastamist, mis kasutab AI-d parema ostukogemuse loomiseks.
+                        </p>
                     </div>
 
-                    <p>
-                        Nosto pakub intelligentset isikupärastamist, mis kasutab AI-d parema ostukogemuse loomiseks.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>DoMyShoot</h3>
 
-                <div class="tool-card">
-                    <h3>DoMyShoot</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Photography</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Photography</span>
+                            <span class="tag">Image Generation</span>
 
-                        <span class="tag">Image Generation</span>
+                            <span class="tag">Ecommerce</span>
+                        </div>
 
-                        <span class="tag">Ecommerce</span>
+                        <p>
+                            DoMyShoot on spetsialiseeritud platvorm, mis on loodud lihtsustama tootefotograafia
+                            e-kaubanduse
+                            müüjatele. See AI-põhine tööriist võimaldab kasutajatel luua kõrgekvaliteedilisi
+                            stuudio-tasemel
+                            pilte.
+                        </p>
                     </div>
 
-                    <p>
-                        DoMyShoot on spetsialiseeritud platvorm, mis on loodud lihtsustama tootefotograafia e-kaubanduse müüjatele. See AI-põhine tööriist võimaldab kasutajatel luua kõrgekvaliteedilisi stuudio-tasemel pilte.
-                    </p>
-                </div>
+                    <div class="tool-card request-card" data-category="Kunsti AI Tööriistad">
+                        <h3>Taotle tööriista lisamist</h3>
+
+                        <p class="request-subtitle">
+                            Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
+                        </p>
 
-                <div
-                    class="tool-card request-card"
-                    data-category="E-kaubanduse AI Tööriistad"
-                >
-                    <h3>Taotle tööriista lisamist</h3>
-
-                    <p class="request-subtitle">
-                        Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
-                    </p>
-
-                    <form class="request-form">
-                        <label>
-                            AI tööriista nimi
-
-                            <input
-                                name="toolName"
-                                placeholder="Nt: Midjourney, Claude, ..."
-                                required=""
-                                type="text"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Veebileht (valikuline)
-
-                            <input
-                                name="toolUrl"
-                                placeholder="https://..."
-                                type="url"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Märkus (valikuline)
-
-                            <textarea
-                                name="message"
-                                placeholder="Mida see tööriist teeb, miks lisada, lisainfo..."
-                                rows="3"
-                            ></textarea>
-                        </label>
-
-                        <button
-                            class="request-send"
-                            type="submit"
-                        >Saada</button>
-
-                        <div
-                            aria-live="polite"
-                            class="request-status"
-                        ></div>
-                    </form>
+                        <button class="request-trigger-btn">Saada</button>
+                    </div>
                 </div>
-            </div>
+
+                <h2 class="category-title">Viimased AI Uuendused</h2>
 
-            <h2 class="category-title">Viimased AI Uuendused</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h3>Nano Banana Pro</h3>
 
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <h3>Nano Banana Pro</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Image Generation</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Image Generation</span>
+                            <span class="tag">Multimodal</span>
+                        </div>
 
-                        <span class="tag">Multimodal</span>
+                        <p>
+                            SOTA pildiloomise mudel, mida toetab Gemini 3 Pro. Pakub ülimalt kvaliteetset visuaalset
+                            täpsust
+                            ja stiilikandeid.
+                        </p>
                     </div>
 
-                    <p>
-                        SOTA pildiloomise mudel, mida toetab Gemini 3 Pro. Pakub ülimalt kvaliteetset visuaalset täpsust ja stiilikandeid.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Gemini 3</h3>
 
-                <div class="tool-card">
-                    <h3>Gemini 3</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Multimodal</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Multimodal</span>
+                            <span class="tag">Reasoning</span>
 
-                        <span class="tag">Reasoning</span>
+                            <span class="tag">Video Generation</span>
+                        </div>
 
-                        <span class="tag">Video Generation</span>
+                        <p>
+                            Google'i uusim suur multimodaalne mudel, millel on edasijõudnud maailmaarusaamise võimed,
+                            mälu
+                            ja interaktiivne genereerimine.
+                        </p>
                     </div>
 
-                    <p>
-                        Google'i uusim suur multimodaalne mudel, millel on edasijõudnud maailmaarusaamise võimed, mälu ja interaktiivne genereerimine.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Sora 2</h3>
 
-                <div class="tool-card">
-                    <h3>Sora 2</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video Generation</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Video Generation</span>
+                            <span class="tag">Animation</span>
+                        </div>
 
-                        <span class="tag">Animation</span>
+                        <p>
+                            Uue põlvkonna AI mudel, millel on loomulik audio ja maailmaarusaamine. Võimaldab lisada
+                            stseenidesse fiktiivseid tegelasi.
+                        </p>
                     </div>
 
-                    <p>
-                        Uue põlvkonna AI mudel, millel on loomulik audio ja maailmaarusaamine. Võimaldab lisada stseenidesse fiktiivseid tegelasi.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Wan Animate</h3>
 
-                <div class="tool-card">
-                    <h3>Wan Animate</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Animation</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Animation</span>
+                            <span class="tag">Video Generation</span>
+                        </div>
 
-                        <span class="tag">Video Generation</span>
+                        <p>
+                            Alibaba AI-põhine animatsioonitööriiist, mis keskendub täiskehaliikumise ja näoilmete
+                            ülekandmisele.
+                        </p>
                     </div>
 
-                    <p>
-                        Alibaba AI-põhine animatsioonitööriiist, mis keskendub täiskehaliikumise ja näoilmete ülekandmisele.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Seedream 4.0</h3>
 
-                <div class="tool-card">
-                    <h3>Seedream 4.0</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Image Generation</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Image Generation</span>
+                            <span class="tag">Editing</span>
+                        </div>
 
-                        <span class="tag">Editing</span>
+                        <p>
+                            ByteDance'i tipptasemel tekst-pildiks ja pilditöötluse mudel. Loob väga detailseid,
+                            fotorealistlikke ja kunstilisi pilte.
+                        </p>
                     </div>
 
-                    <p>
-                        ByteDance'i tipptasemel tekst-pildiks ja pilditöötluse mudel. Loob väga detailseid, fotorealistlikke ja kunstilisi pilte.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Alibaba Wan 2.2</h3>
 
-                <div class="tool-card">
-                    <h3>Alibaba Wan 2.2</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video Generation</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Video Generation</span>
+                            <span class="tag">Free</span>
 
-                        <span class="tag">Free</span>
+                            <span class="tag">Open-source</span>
+                        </div>
 
-                        <span class="tag">Open-source</span>
+                        <p>
+                            Alibaba avatud lähtekoodiga tekst-videoks AI mudel. Genereerib kvaliteetseid videoid
+                            tekstist,
+                            piltidest või video vihjete põhjal.
+                        </p>
                     </div>
 
-                    <p>
-                        Alibaba avatud lähtekoodiga tekst-videoks AI mudel. Genereerib kvaliteetseid videoid tekstist, piltidest või video vihjete põhjal.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Google Veo 3</h3>
 
-                <div class="tool-card">
-                    <h3>Google Veo 3</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Video</span>
+                            <span class="tag">Audio</span>
 
-                        <span class="tag">Audio</span>
+                            <span class="tag">Paid</span>
+                        </div>
 
-                        <span class="tag">Paid</span>
+                        <p>
+                            Google DeepMindi edasijõudnud AI videogeneraator. Muudab teksti, pildid või storyboardid
+                            kõrgkvaliteediks videoteks.
+                        </p>
                     </div>
 
-                    <p>
-                        Google DeepMindi edasijõudnud AI videogeneraator. Muudab teksti, pildid või storyboardid kõrgkvaliteediks videoteks.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Hunyuan Video</h3>
 
-                <div class="tool-card">
-                    <h3>Hunyuan Video</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video Generation</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Video Generation</span>
+                            <span class="tag">Free</span>
+                        </div>
 
-                        <span class="tag">Free</span>
+                        <p>
+                            Tekst-videoks genereerimise mudel ühtse arhitektuuriga piltide ja videote jaoks.
+                        </p>
                     </div>
 
-                    <p>
-                        Tekst-videoks genereerimise mudel ühtse arhitektuuriga piltide ja videote jaoks.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Suno</h3>
 
-                <div class="tool-card">
-                    <h3>Suno</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Music Generation</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Music Generation</span>
+                            <span class="tag">Audio</span>
+                        </div>
 
-                        <span class="tag">Audio</span>
+                        <p>
+                            Generatiivne AI muusika loomise programm, mis toodab realistlikke laule, kombineerides
+                            vokaale
+                            ja instrumentaali kasutaja tekstipõhistest kirjeldustest.
+                        </p>
                     </div>
 
-                    <p>
-                        Generatiivne AI muusika loomise programm, mis toodab realistlikke laule, kombineerides vokaale ja instrumentaali kasutaja tekstipõhistest kirjeldustest.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Kling 2.5</h3>
 
-                <div class="tool-card">
-                    <h3>Kling 2.5</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Video Generation</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Video Generation</span>
+                            <span class="tag">Content</span>
+                        </div>
 
-                        <span class="tag">Content</span>
+                        <p>
+                            AI video genereerimise tööriist pilt-videoks teisendamise võimalustega.
+                        </p>
                     </div>
 
-                    <p>
-                        AI video genereerimise tööriist pilt-videoks teisendamise võimalustega.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>Perplexity</h3>
 
-                <div class="tool-card">
-                    <h3>Perplexity</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Information Retrieval</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Information Retrieval</span>
+                            <span class="tag">Research</span>
+                        </div>
 
-                        <span class="tag">Research</span>
+                        <p>
+                            AI-põhine otsingumotor loomuliku keele töötlusvõimalustega. Pakub sisu genereerimist,
+                            mobiilirakendust ja Chrome laiendust.
+                        </p>
                     </div>
 
-                    <p>
-                        AI-põhine otsingumotor loomuliku keele töötlusvõimalustega. Pakub sisu genereerimist, mobiilirakendust ja Chrome laiendust.
-                    </p>
-                </div>
+                    <div class="tool-card">
+                        <h3>TensorArt</h3>
 
-                <div class="tool-card">
-                    <h3>TensorArt</h3>
+                        <div class="tool-tags">
+                            <span class="tag">Image Generation</span>
 
-                    <div class="tool-tags">
-                        <span class="tag">Image Generation</span>
+                            <span class="tag">Anime</span>
+                        </div>
 
-                        <span class="tag">Anime</span>
+                        <p>
+                            Platvorm AI kunsti genereerimiseks, põhineb Flux ja Stable Diffusion mudelitel, pakkudes
+                            tööriistu ja töövoogusid piltide loomiseks.
+                        </p>
                     </div>
 
-                    <p>
-                        Platvorm AI kunsti genereerimiseks, põhineb Flux ja Stable Diffusion mudelitel, pakkudes tööriistu ja töövoogusid piltide loomiseks.
-                    </p>
-                </div>
+                    <div class="tool-card request-card" data-category="Kunsti AI Tööriistad">
+                        <h3>Taotle tööriista lisamist</h3>
 
-                <div
-                    class="tool-card request-card"
-                    data-category="Viimased AI Uuendused"
-                >
-                    <h3>Taotle tööriista lisamist</h3>
-
-                    <p class="request-subtitle">
-                        Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
-                    </p>
-
-                    <form class="request-form">
-                        <label>
-                            AI tööriista nimi
-
-                            <input
-                                name="toolName"
-                                placeholder="Nt: Midjourney, Claude, ..."
-                                required=""
-                                type="text"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Veebileht (valikuline)
-
-                            <input
-                                name="toolUrl"
-                                placeholder="https://..."
-                                type="url"
-                            ></input>
-                        </label>
-
-                        <label>
-                            Märkus (valikuline)
-
-                            <textarea
-                                name="message"
-                                placeholder="Mida see tööriist teeb, miks lisada, lisainfo..."
-                                rows="3"
-                            ></textarea>
-                        </label>
-
-                        <button
-                            class="request-send"
-                            type="submit"
-                        >Saada</button>
-
-                        <div
-                            aria-live="polite"
-                            class="request-status"
-                        ></div>
-                    </form>
+                        <p class="request-subtitle">
+                            Soovita siia kategooriasse uut AI tööriista. Vajuta “Saada” ja avan e‑posti valmis tekstiga.
+                        </p>
+
+                        <button class="request-trigger-btn">Saada</button>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
     </main>
 
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="contact-container">
-            <h2 class="contact-heading">📧 Võta Ühendust</h2>
-            <p class="contact-description">Kas sul on küsimusi või soovitusi? Võta meiega julgelt ühendust!</p>
-            
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
+            <h2 class="contact-title">Võta Ühendust</h2>
+            <p class="contact-subtitle">Kas sul on küsimusi või soovitusi? Võta meiega julgelt ühendust!</p>
+
+            <div class="contact-content-wrapper">
+                <div class="contact-info-card">
+                    <div class="contact-info-item">
+                        <div class="contact-icon-wrapper">
+                            <i data-lucide="mail"></i>
+                        </div>
                         <div>
-                            <h3>Email</h3>
-                            <p>info@tehismõistus.ee</p>
+                            <h3 class="contact-info-title">Email</h3>
+                            <p class="contact-info-text">info@tehismõistus.ee</p>
                         </div>
                     </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">💬</div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-icon-wrapper">
+                            <i data-lucide="message-square"></i>
+                        </div>
                         <div>
-                            <h3>Tagasiside</h3>
-                            <p>Jaga oma kogemust ja soovitusi</p>
+                            <h3 class="contact-info-title">Tagasiside</h3>
+                            <p class="contact-info-text">Jaga oma kogemust ja soovitusi</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="contact-form-wrapper">
+
+                <div class="contact-form-card">
                     <form class="contact-form">
                         <div class="form-group">
-                            <label for="contact-name">Nimi</label>
-                            <input type="text" id="contact-name" name="name" required />
+                            <label for="contact-name" class="form-label">Nimi</label>
+                            <input type="text" id="contact-name" name="name" class="form-input" placeholder="Sinu nimi"
+                                required />
                         </div>
-                        
+
                         <div class="form-group">
-                            <label for="contact-email">Email</label>
-                            <input type="email" id="contact-email" name="email" required />
+                            <label for="contact-email" class="form-label">Email</label>
+                            <input type="email" id="contact-email" name="email" class="form-input"
+                                placeholder="sinu@email.ee" required />
                         </div>
-                        
+
                         <div class="form-group">
-                            <label for="contact-message">Sõnum</label>
-                            <textarea id="contact-message" name="message" rows="5" required></textarea>
+                            <label for="contact-message" class="form-label">Sõnum</label>
+                            <textarea id="contact-message" name="message" rows="5" class="form-textarea"
+                                placeholder="Kirjuta siia oma sõnum..." required></textarea>
                         </div>
-                        
-                        <button type="submit" class="contact-submit">Saada Sõnum</button>
+
+                        <button type="submit" class="contact-submit-btn">
+                            <span>Saada Sõnum</span>
+                            <i data-lucide="send"></i>
+                        </button>
                     </form>
                 </div>
             </div>
-        </div>
+            <script>
+                // Ensure icons are created for the contact section
+                if (window.lucide) window.lucide.createIcons();
+            </script>
     </section>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-bottom">
-                <p>
-                    © 2025 Tehismõistus. Kõik õigused kaitstud.
-                </p>
+    <!-- Bug Report Modal -->
+    <div id="bugReportModal" class="bug-modal" style="display: none;">
+        <div class="bug-modal-overlay"></div>
+        <div class="bug-modal-content">
+            <div class="bug-modal-header">
+                <h2 class="bug-modal-title">
+                    <i data-lucide="bug"></i>
+                    <span>Teata veast</span>
+                </h2>
+                <button id="closeBugModal" class="bug-modal-close">
+                    <i data-lucide="x"></i>
+                </button>
             </div>
-        </div>
-    </footer>
+            <div class="bug-modal-body">
+                <form id="bugReportForm">
+                    <div class="bug-form-group">
+                        <label for="bugTitle" class="bug-form-label">
+                            <i data-lucide="file-text"></i>
+                            Pealkiri *
+                        </label>
+                        <input type="text" id="bugTitle" class="bug-form-input" placeholder="Kirjelda viga lühidalt..." required>
+                    </div>
 
-    <div
-        id="cookie-banner"
-        style="display:none; position:fixed; left:16px; right:16px; bottom:16px; z-index:9999; padding:14px; border-radius:12px; background:#111; color:#fff;"
-    >
-        <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;">
-            <div style="max-width:780px; line-height:1.35;">
-                <strong>Cookies</strong>
+                    <div class="bug-form-group">
+                        <label for="bugType" class="bug-form-label">
+                            <i data-lucide="list"></i>
+                            Vea tüüp *
+                        </label>
+                        <select id="bugType" class="bug-form-select" required>
+                            <option value="">Vali vea tüüp...</option>
+                            <option value="visual">Visuaalne viga (disain, paigutus)</option>
+                            <option value="functional">Funktsionaalne viga (ei tööta)</option>
+                            <option value="performance">Jõudluse probleem (aeglane)</option>
+                            <option value="security">Turvalisuse mure</option>
+                            <option value="content">Sisu viga (vale info)</option>
+                            <option value="other">Muu</option>
+                        </select>
+                    </div>
 
-                — We use analytics cookies to understand site usage.
-            </div>
+                    <div class="bug-form-group">
+                        <label for="bugDescription" class="bug-form-label">
+                            <i data-lucide="align-left"></i>
+                            Üksikasjalik kirjeldus *
+                        </label>
+                        <textarea id="bugDescription" class="bug-form-textarea" rows="5" placeholder="Kirjelda viga võimalikult täpselt...&#10;&#10;- Mis juhtus?&#10;- Mida sa ootasid?&#10;- Kuidas seda korrata?" required></textarea>
+                    </div>
 
-            <div style="display:flex; gap:10px; align-items:center;">
-                <button
-                    id="cookie-decline"
-                    type="button"
-                    style="padding:10px 12px; border-radius:10px;"
-                >Decline</button>
+                    <div class="bug-form-group">
+                        <label for="bugEmail" class="bug-form-label">
+                            <i data-lucide="mail"></i>
+                            E-posti aadress (valikuline)
+                        </label>
+                        <input type="email" id="bugEmail" class="bug-form-input" placeholder="sinu@email.ee">
+                        <p class="bug-form-hint">Kui soovid, et võtame sinuga ühendust</p>
+                    </div>
 
-                <button
-                    id="cookie-accept"
-                    type="button"
-                    style="padding:10px 12px; border-radius:10px;"
-                >Accept</button>
+                    <div class="bug-form-group">
+                        <label for="bugBrowser" class="bug-form-label">
+                            <i data-lucide="globe"></i>
+                            Brauser & seade (automaatselt tuvastatud)
+                        </label>
+                        <input type="text" id="bugBrowser" class="bug-form-input" readonly>
+                    </div>
+
+                    <div class="bug-form-actions">
+                        <button type="button" id="cancelBugReport" class="bug-btn bug-btn-cancel">
+                            <i data-lucide="x"></i>
+                            Tühista
+                        </button>
+                        <button type="submit" class="bug-btn bug-btn-submit">
+                            <i data-lucide="send"></i>
+                            Saada teade
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Success Message -->
+                <div id="bugSuccessMessage" class="bug-success" style="display: none;">
+                    <div class="bug-success-icon">
+                        <i data-lucide="check-circle"></i>
+                    </div>
+                    <h3>Aitäh!</h3>
+                    <p>Sinu vea teade on edastatud. Vaatame selle üle ja võtame vajadusel ühendust.</p>
+                    <button id="closeBugSuccess" class="bug-btn bug-btn-submit">
+                        Sulge
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo-icon">
+                        <img src="logo-transparent.png" alt="AI Tools" style="width: 48px; height: 48px;">
+                    </div>
+                    <div>
+                        <p class="footer-title">AI Tools</p>
+                        <p class="footer-copyright">© 2026 All rights reserved</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <a href="contact.html" class="footer-link">Kontakt</a>
+                    <a href="privacy-policy.html" class="footer-link">Privaatsus</a>
+                    <a href="terms-of-service.html" class="footer-link">Tingimused</a>
+                    <a href="cookie-policy.html" class="footer-link">Küpsised</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Feedback Button & Form -->
+    <div id="feedbackWidget" class="feedback-widget">
+        <!-- Floating Bubble Button -->
+        <button id="feedbackBubble" class="feedback-bubble" title="Anna tagasisidet">
+            <i data-lucide="message-square"></i>
+            <span class="feedback-bubble-text">Tagasiside</span>
+        </button>
+
+        <!-- Feedback Form Modal -->
+        <div id="feedbackModal" class="feedback-modal hidden">
+            <div class="feedback-modal-content">
+                <div class="feedback-modal-header">
+                    <h3>Anna tagasisidet</h3>
+                    <button id="closeFeedbackModal" class="feedback-close-btn">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+
+                <form id="feedbackForm" class="feedback-form">
+                    <div class="form-group">
+                        <label for="feedbackType">Tagasiside tüüp</label>
+                        <select id="feedbackType" name="type" required>
+                            <option value="">Vali tüüp...</option>
+                            <option value="recommend-ai">🤖 Soovita AI tööriista</option>
+                            <option value="improvement">💡 Parendusettepanekud</option>
+                            <option value="bug">🐛 Teata veast</option>
+                            <option value="other">💬 Muu tagasiside</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="categoryGroup" style="display: none;">
+                        <label for="aiCategory">Kategooria</label>
+                        <select id="aiCategory" name="category">
+                            <option value="">Vali kategooria...</option>
+                            <option value="text">Tekst</option>
+                            <option value="image">Pildid</option>
+                            <option value="video">Videod</option>
+                            <option value="audio">Heli</option>
+                            <option value="code">Kood</option>
+                            <option value="chat">Vestlus</option>
+                            <option value="productivity">Tootlikkus</option>
+                            <option value="other">Muu</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedbackMessage">Sinu sõnum *</label>
+                        <textarea 
+                            id="feedbackMessage" 
+                            name="message" 
+                            rows="5" 
+                            placeholder="Kirjelda oma tagasisidet detailselt..."
+                            required
+                            maxlength="1000"
+                        ></textarea>
+                        <span class="char-counter">0/1000</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedbackEmail">E-mail (valikuline)</label>
+                        <input 
+                            type="email" 
+                            id="feedbackEmail" 
+                            name="email" 
+                            placeholder="sinu@email.ee"
+                        />
+                        <small>Kui soovid, et võtaksime sinuga ühendust</small>
+                    </div>
+
+                    <div class="feedback-form-actions">
+                        <button type="button" id="cancelFeedback" class="btn-secondary">Tühista</button>
+                        <button type="submit" id="submitFeedback" class="btn-primary">
+                            <i data-lucide="send"></i>
+                            <span>Saada</span>
+                        </button>
+                    </div>
+                </form>
+
+                <div id="feedbackSuccess" class="feedback-success hidden">
+                    <div class="success-icon">
+                        <i data-lucide="check-circle"></i>
+                    </div>
+                    <h3>Täname tagasiside eest!</h3>
+                    <p>Sinu tagasiside on meieni jõudnud. Vaatame selle läbi ja võtame vajadusel ühendust.</p>
+                    <button id="closeFeedbackSuccess" class="btn-primary">Sulge</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner"
+        style="display:none; position:fixed; left:16px; right:16px; bottom:16px; z-index:9999; padding:20px; border-radius:12px; background:#111; color:#fff; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
+        <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center; justify-content:space-between;">
+            <div style="max-width:680px; line-height:1.5;">
+                <strong style="font-size: 1.1rem; display: block; margin-bottom: 8px;">🍪 Küpsiste Teade</strong>
+                <p style="margin: 0; opacity: 0.9;">
+                    Me kasutame küpsiseid parema kasutajakogemuse tagamiseks ja teie sessiooni haldamiseks. 
+                    Jätkates nõustute küpsiste kasutamisega.
+                    <a href="cookie-policy.html" style="color: #60a5fa; text-decoration: underline;" target="_blank">Loe lähemalt</a>
+                </p>
+            </div>
+
+            <div style="display:flex; gap:10px; align-items:center;">
+                <button id="cookie-decline" type="button"
+                    style="padding:10px 20px; border-radius:8px; background: transparent; border: 1px solid #fff; color: #fff; cursor: pointer; font-weight: 500;">
+                    Keeldu
+                </button>
+
+                <button id="cookie-accept" type="button" 
+                    style="padding:10px 24px; border-radius:8px; background: #3b82f6; border: none; color: #fff; cursor: pointer; font-weight: 600;">
+                    Nõustun
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="auth-modal">
+        <div class="auth-modal-content">
+            <button class="auth-modal-close" id="login-close">&times;</button>
+            <h2 class="auth-modal-title">Logi sisse</h2>
+            <p class="auth-modal-subtitle">Tere tulemast tagasi!</p>
+
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="login-email">E-post</label>
+                    <input type="email" id="login-email" name="email" placeholder="sinu@email.ee" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Parool</label>
+                    <input type="password" id="login-password" name="password" placeholder="Sisesta oma parool"
+                        required>
+                </div>
+
+                <div id="login-error" class="auth-error" style="display: none;"></div>
+
+                <button type="submit" class="auth-submit-btn" id="login-submit">Logi sisse</button>
+            </form>
+
+            <p class="auth-switch">
+                Pole veel kontot? <a href="#" id="show-register">Registreeru siin</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="auth-modal">
+        <div class="auth-modal-content">
+            <button class="auth-modal-close" id="register-close">&times;</button>
+            <h2 class="auth-modal-title">Loo konto</h2>
+            <p class="auth-modal-subtitle">Liitu meiega täna!</p>
+
+            <form id="register-form" class="auth-form">
+                <div class="form-group">
+                    <label for="register-username">Kasutajanimi</label>
+                    <input type="text" id="register-username" name="username" placeholder="Vali kasutajanimi" required
+                        minlength="3">
+                </div>
+
+                <div class="form-group">
+                    <label for="register-email">E-post</label>
+                    <input type="email" id="register-email" name="email" placeholder="sinu@email.ee" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-password">Parool</label>
+                    <input type="password" id="register-password" name="password" placeholder="Vähemalt 6 tähemärki"
+                        required minlength="6">
+                </div>
+
+                <div class="form-group">
+                    <label for="register-password-confirm">Kinnita parool</label>
+                    <input type="password" id="register-password-confirm" name="passwordConfirm"
+                        placeholder="Sisesta parool uuesti" required minlength="6">
+                </div>
+
+                <div class="form-group" style="margin-top: 16px;">
+                    <label style="display: flex; align-items: start; gap: 8px; cursor: pointer; font-size: 0.9rem; line-height: 1.5;">
+                        <input type="checkbox" id="terms-consent" required 
+                            style="margin-top: 3px; width: 18px; height: 18px; cursor: pointer;">
+                        <span style="color: #4b5563;">
+                            Olen lugenud ja nõustun 
+                            <a href="terms-of-service.html" target="_blank" style="color: #3b82f6; text-decoration: underline;">kasutustingimustega</a> 
+                            ja 
+                            <a href="privacy-policy.html" target="_blank" style="color: #3b82f6; text-decoration: underline;">privaatsuspoliitikaga</a>.
+                        </span>
+                    </label>
+                </div>
+
+                <div id="register-error" class="auth-error" style="display: none;"></div>
+                <div id="register-success" class="auth-success" style="display: none;"></div>
+
+                <button type="submit" class="auth-submit-btn" id="register-submit">Registreeru</button>
+            </form>
+
+            <p class="auth-switch">
+                Juba konto olemas? <a href="#" id="show-login">Logi sisse siin</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profile-modal" class="auth-modal">
+        <div class="auth-modal-content">
+            <button class="auth-modal-close" id="profile-close">&times;</button>
+            <h2 class="auth-modal-title">Minu profiil</h2>
+
+            <div class="profile-info">
+                <div class="profile-avatar">👤</div>
+                <h3 id="profile-username">Kasutajanimi</h3>
+                <p id="profile-email" class="profile-email">email@email.ee</p>
+                <p class="profile-date">Liitus: <span id="profile-date">-</span></p>
+            </div>
+
+            <div class="profile-section">
+                <h3>Muuda parooli</h3>
+                <form id="password-change-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="current-password">Praegune parool</label>
+                        <input type="password" id="current-password" name="currentPassword" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="new-password">Uus parool</label>
+                        <input type="password" id="new-password" name="newPassword" required minlength="6">
+                    </div>
+
+                    <div id="password-error" class="auth-error" style="display: none;"></div>
+                    <div id="password-success" class="auth-success" style="display: none;"></div>
+
+                    <button type="submit" class="auth-submit-btn">Muuda parooli</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+
+    <!-- Cookie Banner Script -->
+    <script>
+        // Cookie Banner Functionality
+        (function() {
+            const cookieBanner = document.getElementById('cookie-banner');
+            const cookieAccept = document.getElementById('cookie-accept');
+            const cookieDecline = document.getElementById('cookie-decline');
+            
+            // Check if user has already made a choice
+            const cookieConsent = localStorage.getItem('cookie_consent');
+            
+            if (!cookieConsent) {
+                // Show banner after 1 second
+                setTimeout(() => {
+                    cookieBanner.style.display = 'block';
+                }, 1000);
+            }
+            
+            // Accept cookies
+            cookieAccept.addEventListener('click', () => {
+                localStorage.setItem('cookie_consent', 'accepted');
+                cookieBanner.style.display = 'none';
+                console.log('Cookies accepted');
+            });
+            
+            // Decline cookies
+            cookieDecline.addEventListener('click', () => {
+                localStorage.setItem('cookie_consent', 'declined');
+                cookieBanner.style.display = 'none';
+                console.log('Cookies declined - only essential cookies will be used');
+            });
+        })();
+    </script>
+
+    <script src="bug-report.js"></script>
+    <script src="community.js"></script>
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script src="notifications.js"></script>
+    <script src="feedback.js"></script>
+    <script src="tools-data.js"></script>
     <script src="script.js"></script>
     <script src="request-forms.js"></script>
 </body>
+
 </html>

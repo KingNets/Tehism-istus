@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="et">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Küpsiste Poliitika - AI Tools Directory</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .policy-container {
+            max-width: 900px;
+            margin: 100px auto 60px;
+            padding: 40px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .policy-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .policy-header h1 {
+            font-size: 2.5rem;
+            color: #111;
+            margin-bottom: 12px;
+        }
+
+        .policy-header .last-updated {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .policy-section {
+            margin-bottom: 32px;
+        }
+
+        .policy-section h2 {
+            font-size: 1.5rem;
+            color: #111;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .policy-section h3 {
+            font-size: 1.2rem;
+            color: #333;
+            margin: 20px 0 12px;
+        }
+
+        .policy-section p,
+        .policy-section li {
+            color: #4b5563;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .policy-section ul {
+            padding-left: 24px;
+        }
+
+        .policy-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .cookie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .cookie-table th {
+            background: #f3f4f6;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #111;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .cookie-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            color: #4b5563;
+        }
+
+        .cookie-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #3b82f6;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            color: #2563eb;
+        }
+
+        @media (max-width: 768px) {
+            .policy-container {
+                margin: 80px 16px 40px;
+                padding: 24px;
+            }
+
+            .policy-header h1 {
+                font-size: 2rem;
+            }
+
+            .cookie-table {
+                font-size: 0.9rem;
+            }
+
+            .cookie-table th,
+            .cookie-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="policy-container">
+        <a href="index.html" class="back-link">
+            ← Tagasi avalehele
+        </a>
+
+        <div class="policy-header">
+            <h1>Küpsiste Poliitika</h1>
+            <p class="last-updated">Viimati uuendatud: 29. jaanuar 2026</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>1. Mis on Küpsised?</h2>
+            <p>
+                Küpsised (cookies) on väikesed tekstifailid, mis salvestatakse teie seadmesse (arvutisse, tahvelarvutisse
+                või nutitelefoni), kui külastate veebilehte. Need aitavad veebilehel meeles pidada teavet teie
+                külastuse kohta, nagu teie eelistused ja sisselogimise olek.
+            </p>
+            <div class="info-box">
+                <strong>Teadke:</strong> Küpsised ei sisalda viirusi ega pahavara. Need on lihtsalt tekstifailid, mis
+                aitavad veebilehel paremini toimida.
+            </div>
+        </div>
+
+        <div class="policy-section">
+            <h2>2. Miks Me Küpsiseid Kasutame?</h2>
+            <p>Me kasutame küpsiseid järgmistel eesmärkidel:</p>
+            <ul>
+                <li><strong>Autentimine:</strong> Teie sisselogimise oleku meeldejätmine</li>
+                <li><strong>Turvalisus:</strong> Teie konto ja sessiooni kaitsmine</li>
+                <li><strong>Funktionaalsus:</strong> Teie eelistuste (nt keel, teema) salvestamine</li>
+                <li><strong>Kasutajakogemus:</strong> Teenuse parendamine teie vajaduste järgi</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h2>3. Milliseid Küpsiseid Me Kasutame?</h2>
+
+            <h3>3.1 Vajalikud Küpsised (ei vaja nõusolekut)</h3>
+            <p>
+                Need küpsised on teenuse toimimiseks hädavajalikud. Ilma nende küpsisteta ei saa teenus korralikult
+                toimida.
+            </p>
+
+            <table class="cookie-table">
+                <thead>
+                    <tr>
+                        <th>Küpsis</th>
+                        <th>Eesmärk</th>
+                        <th>Kehtivus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>auth_token</code></td>
+                        <td>Kasutaja autentimise token</td>
+                        <td>7 päeva</td>
+                    </tr>
+                    <tr>
+                        <td><code>session_id</code></td>
+                        <td>Sessiooni identifikaator</td>
+                        <td>Sessiooni lõpuni</td>
+                    </tr>
+                    <tr>
+                        <td><code>currentUser</code></td>
+                        <td>Kasutaja info (localStorage)</td>
+                        <td>Kuni väljumiseni</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>3.2 Funktsionaalsed Küpsised</h3>
+            <p>
+                Need küpsised võimaldavad veebilehel meeles pidada teie tehtud valikuid (nagu kasutajanimi või keel)
+                ning pakuvad täiustatud ja isiklikumaid funktsioone.
+            </p>
+
+            <table class="cookie-table">
+                <thead>
+                    <tr>
+                        <th>Küpsis</th>
+                        <th>Eesmärk</th>
+                        <th>Kehtivus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>cookie_consent</code></td>
+                        <td>Küpsiste nõusoleku salvestamine</td>
+                        <td>12 kuud</td>
+                    </tr>
+                    <tr>
+                        <td><code>language_preference</code></td>
+                        <td>Keele eelistus</td>
+                        <td>12 kuud</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="policy-section">
+            <h2>4. Kolmandate Osapoolte Küpsised</h2>
+            <p>
+                Praegu me ei kasuta kolmandate osapoolte küpsiseid (nagu Google Analytics). Kui me tulevikus otsustame
+                neid kasutada, teavitame teid ja küsime teie nõusolekut.
+            </p>
+            <p>Võimalikud kolmandad osapooled tulevikus:</p>
+            <ul>
+                <li>Google Analytics - veebilehe külastuste analüüsiks</li>
+                <li>Cloudflare - turvalisuse ja jõudluse tagamiseks</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h2>5. Kuidas Küpsiseid Hallata?</h2>
+
+            <h3>5.1 Brauseri Seaded</h3>
+            <p>Enamik brausereid võimaldab teil:</p>
+            <ul>
+                <li>Vaadata salvestatud küpsiseid</li>
+                <li>Kustutada küpsiseid</li>
+                <li>Blokeerida küpsiseid</li>
+                <li>Saada teavitusi uutest küpsistest</li>
+            </ul>
+
+            <h3>5.2 Küpsiste Keelamine</h3>
+            <p>Juhised küpsiste keelamiseks populaarsetes brauserites:</p>
+            <ul>
+                <li><strong>Chrome:</strong> Seaded → Privaatsus ja turvalisus → Küpsised ja muud saidi andmed</li>
+                <li><strong>Firefox:</strong> Seaded → Privaatsus ja turvalisus → Küpsised ja saidi andmed</li>
+                <li><strong>Safari:</strong> Eelistused → Privaatsus → Küpsised ja veebilehe andmed</li>
+                <li><strong>Edge:</strong> Seaded → Küpsised ja saidi load → Halda ja kustuta küpsiseid</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>Hoiatus:</strong> Küpsiste keelamine võib mõjutada veebilehe funktsionaalsust. Te ei pruugi
+                saada sisse logida või kasutada teatud funktsioone.
+            </div>
+        </div>
+
+        <div class="policy-section">
+            <h2>6. LocalStorage ja SessionStorage</h2>
+            <p>
+                Lisaks küpsistele kasutame ka brauseri kohalikku salvestust (localStorage ja sessionStorage):
+            </p>
+            <ul>
+                <li><strong>localStorage:</strong> Pikaajaline andmete salvestus (ei aegu automaatselt)</li>
+                <li><strong>sessionStorage:</strong> Lühiajaline salvestus (kustub brauseri sulgemisel)</li>
+            </ul>
+            <p>Need ei erine küpsistest funktsionaalsuse poolest, aga on mõeldud rohkemate andmete salvestamiseks.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>7. Teie Õigused</h2>
+            <p>GDPR kohaselt on teil õigus:</p>
+            <ul>
+                <li>Teada, milliseid küpsiseid me kasutame</li>
+                <li>Nõustuda või keelduda küpsistest</li>
+                <li>Muuta oma nõusolekut igal ajal</li>
+                <li>Kustutada küpsiseid oma seadmest</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h2>8. Küpsiste Kehtivusaeg</h2>
+            <p>Erinevatel küpsistel on erinev kehtivusaeg:</p>
+            <ul>
+                <li><strong>Sessiooni küpsised:</strong> Kustutatakse brauseri sulgemisel</li>
+                <li><strong>Püsivad küpsised:</strong> Jäävad aktiivseks kuni aegumiskuupäevani või kustutamiseni</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h2>9. Muudatused Küpsiste Poliitikas</h2>
+            <p>
+                Me võime seda poliitikat aeg-ajalt uuendada. Olulisematest muudatustest teavitame teid veebilehe
+                kaudu. Viimase uuendamise kuupäev on märgitud dokumendi alguses.
+            </p>
+        </div>
+
+        <div class="policy-section">
+            <h2>10. Küpsiste Nõusolek</h2>
+            <p>
+                Meie veebilehe külastades näete küpsiste baanrit, mis palub teie nõusolekut. Saate valida:
+            </p>
+            <ul>
+                <li><strong>Nõustun:</strong> Lubate kõiki küpsiseid</li>
+                <li><strong>Keeldu:</strong> Lubate ainult vajalikke küpsiseid</li>
+                <li><strong>Seaded:</strong> Valige, milliseid küpsiseid lubada</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h2>11. Kontakt</h2>
+            <p>Küsimuste korral küpsiste kohta võtke meiega ühendust:</p>
+            <p><strong>E-post:</strong> info@ai-tools.ee</p>
+            <p>
+                Rohkem infot andmete töötlemise kohta leiate meie
+                <a href="privacy-policy.html" style="color: #3b82f6;">privaatsuspoliitikast</a>.
+            </p>
+        </div>
+
+        <div class="policy-section">
+            <h2>12. Kasulikud Lingid</h2>
+            <ul>
+                <li><a href="https://www.aki.ee" target="_blank" style="color: #3b82f6;">Andmekaitse
+                        Inspektsioon</a></li>
+                <li><a href="https://gdpr.eu/cookies/" target="_blank" style="color: #3b82f6;">GDPR ja
+                        Küpsised</a></li>
+                <li><a href="https://www.aboutcookies.org/" target="_blank" style="color: #3b82f6;">About
+                        Cookies</a></li>
+            </ul>
+        </div>
+
+        <a href="index.html" class="back-link" style="margin-top: 40px;">
+            ← Tagasi avalehele
+        </a>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        if (window.lucide) window.lucide.createIcons();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="et">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt - AI Tools Directory</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .contact-container {
+            max-width: 900px;
+            margin: 100px auto 60px;
+            padding: 40px;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .contact-header h1 {
+            font-size: 2.5rem;
+            color: #111;
+            margin-bottom: 12px;
+        }
+
+        .contact-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .contact-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: #eff6ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3b82f6;
+        }
+
+        .contact-card h3 {
+            font-size: 1.3rem;
+            color: #111;
+            margin-bottom: 12px;
+        }
+
+        .contact-card p {
+            color: #666;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .contact-card a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        .faq-section {
+            background: #fff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        .faq-section h2 {
+            font-size: 1.8rem;
+            color: #111;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .faq-item {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #111;
+            margin-bottom: 8px;
+        }
+
+        .faq-answer {
+            color: #4b5563;
+            line-height: 1.7;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #3b82f6;
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            color: #2563eb;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                margin: 80px 16px 40px;
+                padding: 20px;
+            }
+
+            .contact-header h1 {
+                font-size: 2rem;
+            }
+
+            .faq-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contact-container">
+        <a href="index.html" class="back-link">
+            ← Tagasi avalehele
+        </a>
+
+        <div class="contact-header">
+            <h1>Võtke Meiega Ühendust</h1>
+            <p>Meil on hea meel teid aidata! Valige sobiv kontaktviis</p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i data-lucide="mail" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>E-post</h3>
+                <p>Üldised küsimused ja tagasiside</p>
+                <a href="mailto:info@ai-tools.ee">info@ai-tools.ee</a>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i data-lucide="shield" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Privaatsus & GDPR</h3>
+                <p>Andmekaitse ja privaatsusega seotud küsimused</p>
+                <a href="mailto:privacy@ai-tools.ee">privacy@ai-tools.ee</a>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i data-lucide="life-buoy" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Tugi</h3>
+                <p>Tehnilised probleemid ja abi</p>
+                <a href="mailto:support@ai-tools.ee">support@ai-tools.ee</a>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h2>Korduma Kippuvad Küsimused</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">❓ Kuidas ma saan oma konto kustutada?</div>
+                <div class="faq-answer">
+                    Saate oma konto kustutada, logides sisse ja minnes profiili seadetesse. Alternatiivselt võite
+                    meile kirjutada e-posti aadressil info@ai-tools.ee ning me kustutame teie konto 30 päeva
+                    jooksul.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">❓ Kuidas ma saan oma andmeid eksportida?</div>
+                <div class="faq-answer">
+                    GDPR kohaselt on teil õigus saada koopia oma andmetest. Kirjutage meile aadressil
+                    privacy@ai-tools.ee ning me saadame teile kõik teie andmed 30 päeva jooksul.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">❓ Kuidas lisada uus AI tööriist kataloogi?</div>
+                <div class="faq-answer">
+                    Kirjutage meile e-posti aadressil info@ai-tools.ee koos tööriista nimega, lingiga, kirjeldusega
+                    ja kategooriaga. Me vaatame ettepaneku läbi ja lisame selle võimalikult kiiresti.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">❓ Kas see teenus on tasuta?</div>
+                <div class="faq-answer">
+                    Jah, AI Tools Directory on täiesti tasuta kõigile kasutajatele. Me ei küsi kunagi maksuteavet.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">❓ Kuidas teatada ebasobivast sisust?</div>
+                <div class="faq-answer">
+                    Kui märkate ebasobivat sisu (solvavad kommentaarid, rämpsposti vms), palun teatage meile
+                    viivitamatult aadressil support@ai-tools.ee. Lisage kindlasti link probleemse sisu juurde.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">❓ Kas minu andmed on turvalisedandmeid?</div>
+                <div class="faq-answer">
+                    Jah! Me kasutame mitmeid turvameetmeid: paroolid on krüpteeritud, andmed säilitatakse
+                    turvaliselt MongoDB serverites, ning järgime GDPR nõudeid. Lisainfot leiate meie
+                    <a href="privacy-policy.html" style="color: #3b82f6;">privaatsuspoliitikast</a>.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">❓ Kuidas muuta oma kasutajanime või e-posti?</div>
+                <div class="faq-answer">
+                    Praegu ei ole võimalik kasutajanime ise muuta. Kui soovite muuta oma e-posti aadressi või
+                    kasutajanime, võtke meiega ühendust aadressil support@ai-tools.ee.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">❓ Millises keeles teenus toimib?</div>
+                <div class="faq-answer">
+                    Hetkel on teenus peamiselt eesti keeles. Töötame selle kallal, et lisada inglise keele tugi
+                    lähitulevikus.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">❓ Kas te vastutate AI tööriistade eest?</div>
+                <div class="faq-answer">
+                    Ei, me ei ole arendajad ega omanikud loetletud AI tööriistadest. Me pakume ainult informatsiooni
+                    ja kogukonna platvormi. Iga tööriista kasutamine toimub teie enda vastutusel.
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-card" style="margin-top: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            <div class="contact-icon" style="background: #fef2f2; color: #dc2626;">
+                <i data-lucide="alert-circle" style="width: 28px; height: 28px;"></i>
+            </div>
+            <h3>Andmekaitse Inspektsioon</h3>
+            <p>Kui teil on pretensioone andmekaitse kohta:</p>
+            <p><strong>Aadress:</strong> Tatari 39, 10134 Tallinn</p>
+            <p><strong>E-post:</strong> <a href="mailto:info@aki.ee">info@aki.ee</a></p>
+            <p><strong>Telefon:</strong> +372 627 4135</p>
+            <p><a href="https://www.aki.ee" target="_blank">www.aki.ee</a></p>
+        </div>
+
+        <a href="index.html" class="back-link" style="margin-top: 40px; display: flex; justify-content: center;">
+            ← Tagasi avalehele
+        </a>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        if (window.lucide) window.lucide.createIcons();
+    </script>
+</body>
+
+</html>
