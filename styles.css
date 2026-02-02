@@ -1415,6 +1415,25 @@ body::before {
     box-shadow: var(--shadow-2xl);
     transform: scale(0.9) translateY(20px);
     transition: transform var(--transition-base);
+    position: relative;
+}
+
+/* Custom scrollbar for modal */
+.modal-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal-container::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.modal-container::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
 }
 
 .modal-overlay:not(.hidden) .modal-container {
@@ -1460,6 +1479,36 @@ body::before {
 .modal-close-btn i {
     width: 1rem;
     height: 1rem;
+}
+
+/* Close button for tool modal */
+.modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 110;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+}
+
+.modal-close:hover {
+    background: #f3f4f6;
+    transform: scale(1.1);
+}
+
+.modal-close i {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #374151;
 }
 
 .modal-close-btn {
