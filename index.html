@@ -2602,6 +2602,19 @@
         })();
     </script>
 
+    <!-- Tool Modal -->
+    <div id="toolModal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeToolModal()"></div>
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeToolModal()">
+                <i data-lucide="x"></i>
+            </button>
+            <div id="modalContent" class="modal-content">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
     <script src="bug-report.js"></script>
     <script src="community.js"></script>
     <script src="auth.js"></script>
