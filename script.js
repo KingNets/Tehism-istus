@@ -1944,7 +1944,12 @@ function initializeReviewForm(toolName) {
 async function openToolModal(data) {
     const modal = document.getElementById('toolModal');
     const content = document.getElementById('modalContent');
-    if (!modal || !content) return;
+    if (!modal || !content) {
+        console.error('Modal or content element not found');
+        return;
+    }
+
+    console.log('Opening modal for:', data.title);
 
     // Normalize title to find key in toolsData using comprehensive mapping
     const toolName = data.title.toLowerCase().trim();
@@ -2268,6 +2273,21 @@ async function openToolModal(data) {
                     }, 150);
                 }, 100);
             }
+        }
+    }).catch(error => {
+        console.error('Error loading reviews:', error);
+        const container = document.getElementById('reviewSectionContainer');
+        if (container) {
+            container.innerHTML = `
+                <div class="modal-section review-section">
+                    <div class="review-header">
+                        <h3 class="modal-section-title">Hinnangud ja Küsimused</h3>
+                    </div>
+                    <div style="text-align: center; padding: 2rem; color: #ef4444;">
+                        <p>Hinnangute laadimine ebaõnnestus. Palun proovi hiljem uuesti.</p>
+                    </div>
+                </div>
+            `;
         }
     });
 }
