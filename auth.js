@@ -1,5 +1,5 @@
 // Authentication Manager
-const API_URL = 'http://localhost:5001/api';
+const API_URL = 'https://peaceful-youthfulness-production-5af4.up.railway.app/api';
 const USE_LOCAL_AUTH = false; // Set to false when backend is ready
 
 // Auth State

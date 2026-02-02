@@ -1,6 +1,6 @@
 // Feedback Widget
 (function() {
-    const API_URL = 'http://localhost:5001/api';
+    const API_URL = 'https://peaceful-youthfulness-production-5af4.up.railway.app/api';
     
     // Initialize feedback widget
     function initFeedbackWidget() {

@@ -26,7 +26,11 @@ app.use('/api/', limiter);
 
 // CORS configuration
 app.use(cors({
-  origin: process.env.CLIENT_URL || '*',
+  origin: [
+    process.env.FRONTEND_URL || 'https://xn--tehismistus-kfb.ee',
+    'https://xn--tehismistus-kfb.ee',
+    'https://tehismõistus.ee'
+  ],
   credentials: true
 }));
 

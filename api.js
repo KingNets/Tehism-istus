@@ -1,5 +1,5 @@
 // API Configuration
-const API_BASE_URL = 'http://localhost:5001/api';
+const API_BASE_URL = 'https://peaceful-youthfulness-production-5af4.up.railway.app/api';
 
 // API Helper function
 async function apiRequest(endpoint, options = {}) {

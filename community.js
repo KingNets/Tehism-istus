@@ -1,6 +1,6 @@
 // Community Section - Latest Reviews and Questions
 (function() {
-    const API_URL = 'http://localhost:5001/api';
+    const API_URL = 'https://peaceful-youthfulness-production-5af4.up.railway.app/api';
     const MAX_ITEMS = 8;
     const CACHE_DURATION = 30000; // 30 seconds cache
     const FETCH_TIMEOUT = 2000; // Reduced to 2 seconds

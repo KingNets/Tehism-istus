@@ -579,7 +579,7 @@ async function enhanceToolCards() {
             // Try to get actual rating from API
             try {
                 // Use the exact title as toolId (case-sensitive)
-                const reviewsResponse = await fetch(`http://localhost:5001/api/reviews/tool/${encodeURIComponent(title)}`);
+                const reviewsResponse = await fetch(`https://peaceful-youthfulness-production-5af4.up.railway.app/api/reviews/tool/${encodeURIComponent(title)}`);
                 if (reviewsResponse.ok) {
                     const reviewsData = await reviewsResponse.json();
                     if (reviewsData.success && reviewsData.data && reviewsData.data.length > 0) {
