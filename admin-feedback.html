@@ -420,8 +420,6 @@
     <script src="auth.js"></script>
     <script src="api.js"></script>
     <script>
-        const API_URL = 'https://peaceful-youthfulness-production-5af4.up.railway.app/api';
-
         // Check admin access
         function checkAdminAccess() {
             const user = window.getAuthUser ? window.getAuthUser() : null;
@@ -455,7 +453,7 @@
                 const token = localStorage.getItem('authToken');
                 
                 // Load feedback
-                const feedbackRes = await fetch(`${API_URL}/feedback`, {
+                const feedbackRes = await fetch(`${API_BASE_URL}/feedback`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -464,7 +462,7 @@
                 const feedback = feedbackData.success ? feedbackData.data : [];
 
                 // Load bugs
-                const bugsRes = await fetch(`${API_URL}/bugs`, {
+                const bugsRes = await fetch(`${API_BASE_URL}/bugs`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -571,7 +569,7 @@
                 const token = localStorage.getItem('authToken');
                 const endpoint = type === 'bug' ? 'bugs' : 'feedback';
                 
-                const response = await fetch(`${API_URL}/${endpoint}/${id}`, {
+                const response = await fetch(`${API_BASE_URL}/${endpoint}/${id}`, {
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${token}`
