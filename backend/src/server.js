@@ -45,6 +45,7 @@ app.use('/api/reviews', require('./routes/review.routes'));
 app.use('/api/questions', require('./routes/question.routes'));
 app.use('/api/notifications', require('./routes/notification.routes'));
 app.use('/api/feedback', require('./routes/feedback.routes'));
+app.use('/api/bugs', require('./routes/bugReport.routes'));
 app.use('/api/contact', require('./routes/contact.routes'));
 app.use('/api/admin/tools', require('./routes/tool.routes'));
 

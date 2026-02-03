@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Tagasiside ja Vearaportid</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="icon" type="image/png" href="logo-favicon.png" />
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .admin-header {
+            margin-bottom: 2rem;
+        }
+
+        .admin-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-subtitle {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+            margin-bottom: 2rem;
+        }
+
+        .admin-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #6b7280;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .admin-tab:hover {
+            color: #1a1a1a;
+        }
+
+        .admin-tab.active {
+            color: #1a1a1a;
+            border-bottom-color: #1a1a1a;
+        }
+
+        .admin-content {
+            display: none;
+        }
+
+        .admin-content.active {
+            display: block;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-icon.feedback {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .stat-icon.bug {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .stat-icon.pending {
+            background: #fef3c7;
+            color: #f59e0b;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .items-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .item-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+        }
+
+        .item-card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-type {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-type.feedback {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .item-type.bug {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .item-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+
+        .item-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .item-message {
+            color: #1a1a1a;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .item-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .item-btn.primary {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .item-btn.primary:hover {
+            background: #374151;
+        }
+
+        .item-btn.secondary {
+            background: #f3f4f6;
+            color: #1a1a1a;
+        }
+
+        .item-btn.secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .item-btn.danger {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .item-btn.danger:hover {
+            background: #fecaca;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .empty-state i {
+            width: 3rem;
+            height: 3rem;
+            margin-bottom: 1rem;
+            color: #d1d5db;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            font-size: 0.875rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.75rem;">
+                        <img src="logo-transparent.png" alt="Tehismõistus Logo" class="logo-img">
+                        <span class="logo-text">Tehismõistus</span>
+                    </a>
+                </div>
+
+                <nav class="header-nav">
+                    <a href="admin.html" class="nav-link">
+                        <i data-lucide="layout-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="admin-manage.html" class="nav-link">
+                        <i data-lucide="settings"></i>
+                        <span>Halda AI-sid</span>
+                    </a>
+                    <a href="admin-feedback.html" class="nav-link active">
+                        <i data-lucide="message-square"></i>
+                        <span>Tagasiside</span>
+                    </a>
+                </nav>
+
+                <div id="authButtons" class="auth-section"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main style="padding-top: 80px;">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h1 class="admin-title">Tagasiside ja Vearaportid</h1>
+                <p class="admin-subtitle">Vaata ja halda kasutajate tagasisidet ning veateateid</p>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon feedback">
+                            <i data-lucide="message-square"></i>
+                        </div>
+                        <div>
+                            <div class="stat-label">Tagasiside kokku</div>
+                            <div class="stat-value" id="totalFeedback">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon bug">
+                            <i data-lucide="bug"></i>
+                        </div>
+                        <div>
+                            <div class="stat-label">Vearaportid kokku</div>
+                            <div class="stat-value" id="totalBugs">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon pending">
+                            <i data-lucide="clock"></i>
+                        </div>
+                        <div>
+                            <div class="stat-label">Uued (täna)</div>
+                            <div class="stat-value" id="todayCount">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="all">
+                    <i data-lucide="inbox"></i>
+                    Kõik
+                </button>
+                <button class="admin-tab" data-tab="feedback">
+                    <i data-lucide="message-square"></i>
+                    Tagasiside
+                </button>
+                <button class="admin-tab" data-tab="bugs">
+                    <i data-lucide="bug"></i>
+                    Vearaportid
+                </button>
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-bar">
+                <select class="filter-select" id="sortFilter">
+                    <option value="newest">Uusimad enne</option>
+                    <option value="oldest">Vanemad enne</option>
+                </select>
+                <input type="text" class="search-input" id="searchInput" placeholder="Otsi sõnumi järgi...">
+            </div>
+
+            <!-- Content -->
+            <div class="admin-content active" id="content-all">
+                <div class="items-container" id="allItems">
+                    <div class="loading">
+                        <i data-lucide="loader" class="spinning"></i>
+                        <p>Laadimine...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-content" id="content-feedback">
+                <div class="items-container" id="feedbackItems">
+                    <div class="loading">
+                        <i data-lucide="loader" class="spinning"></i>
+                        <p>Laadimine...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-content" id="content-bugs">
+                <div class="items-container" id="bugItems">
+                    <div class="loading">
+                        <i data-lucide="loader" class="spinning"></i>
+                        <p>Laadimine...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script>
+        const API_URL = 'https://peaceful-youthfulness-production-5af4.up.railway.app/api';
+
+        // Check admin access
+        function checkAdminAccess() {
+            const user = window.getAuthUser ? window.getAuthUser() : null;
+            if (!user || user.role !== 'admin') {
+                window.location.href = 'index.html';
+                return false;
+            }
+            return true;
+        }
+
+        // Tab switching
+        document.querySelectorAll('.admin-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.dataset.tab;
+                
+                // Update active tab
+                document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Update active content
+                document.querySelectorAll('.admin-content').forEach(c => c.classList.remove('active'));
+                document.getElementById(`content-${tabName}`).classList.add('active');
+            });
+        });
+
+        // Load feedback and bugs
+        async function loadData() {
+            if (!checkAdminAccess()) return;
+
+            try {
+                const token = localStorage.getItem('authToken');
+                
+                // Load feedback
+                const feedbackRes = await fetch(`${API_URL}/feedback`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const feedbackData = await feedbackRes.json();
+                const feedback = feedbackData.success ? feedbackData.data : [];
+
+                // Load bugs
+                const bugsRes = await fetch(`${API_URL}/bugs`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const bugsData = await bugsRes.json();
+                const bugs = bugsData.success ? bugsData.data : [];
+
+                // Update stats
+                document.getElementById('totalFeedback').textContent = feedback.length;
+                document.getElementById('totalBugs').textContent = bugs.length;
+                
+                const today = new Date().toDateString();
+                const todayItems = [...feedback, ...bugs].filter(item => 
+                    new Date(item.createdAt).toDateString() === today
+                );
+                document.getElementById('todayCount').textContent = todayItems.length;
+
+                // Render items
+                renderItems([...feedback, ...bugs], 'allItems', 'all');
+                renderItems(feedback, 'feedbackItems', 'feedback');
+                renderItems(bugs, 'bugItems', 'bug');
+
+            } catch (error) {
+                console.error('Error loading data:', error);
+                showError('Viga andmete laadimisel');
+            }
+        }
+
+        function renderItems(items, containerId, type) {
+            const container = document.getElementById(containerId);
+            
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i data-lucide="inbox"></i>
+                        <p>Ühtegi ${type === 'feedback' ? 'tagasisidet' : type === 'bug' ? 'vearaportit' : 'kirjet'} ei leitud</p>
+                    </div>
+                `;
+                if (window.lucide) window.lucide.createIcons();
+                return;
+            }
+
+            container.innerHTML = items.map(item => {
+                const isBug = item.category !== undefined; // Bug reports have category
+                const itemType = isBug ? 'bug' : 'feedback';
+                const date = new Date(item.createdAt).toLocaleDateString('et-EE', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                return `
+                    <div class="item-card" data-id="${item._id}">
+                        <div class="item-header">
+                            <div class="item-info">
+                                <span class="item-type ${itemType}">
+                                    ${isBug ? '🐛 Vearaport' : '💬 Tagasiside'}
+                                </span>
+                                ${isBug ? `<div style="margin-top: 0.5rem;"><strong>Kategooria:</strong> ${item.category}</div>` : ''}
+                                ${item.tool ? `<div style="margin-top: 0.25rem;"><strong>Tööriist:</strong> ${item.tool}</div>` : ''}
+                                <div class="item-meta">
+                                    <span class="item-meta-item">
+                                        <i data-lucide="user"></i>
+                                        ${item.username || item.email || 'Anonüümne'}
+                                    </span>
+                                    <span class="item-meta-item">
+                                        <i data-lucide="calendar"></i>
+                                        ${date}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-message">${item.message || item.description}</div>
+                        <div class="item-actions">
+                            <button class="item-btn secondary" onclick="copyToClipboard('${item._id}')">
+                                <i data-lucide="copy"></i>
+                                Kopeeri
+                            </button>
+                            <button class="item-btn danger" onclick="deleteItem('${item._id}', '${itemType}')">
+                                <i data-lucide="trash-2"></i>
+                                Kustuta
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function copyToClipboard(id) {
+            const card = document.querySelector(`[data-id="${id}"]`);
+            const message = card.querySelector('.item-message').textContent;
+            navigator.clipboard.writeText(message);
+            alert('Sõnum kopeeritud!');
+        }
+
+        async function deleteItem(id, type) {
+            if (!confirm('Kas oled kindel, et soovid selle kustutada?')) return;
+
+            try {
+                const token = localStorage.getItem('authToken');
+                const endpoint = type === 'bug' ? 'bugs' : 'feedback';
+                
+                const response = await fetch(`${API_URL}/${endpoint}/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    alert('Edukalt kustutatud!');
+                    loadData();
+                } else {
+                    throw new Error('Kustutamine ebaõnnestus');
+                }
+            } catch (error) {
+                console.error('Error deleting item:', error);
+                alert('Viga kustutamisel');
+            }
+        }
+
+        function showError(message) {
+            const containers = ['allItems', 'feedbackItems', 'bugItems'];
+            containers.forEach(id => {
+                document.getElementById(id).innerHTML = `
+                    <div class="empty-state">
+                        <i data-lucide="alert-circle" style="color: #dc2626;"></i>
+                        <p>${message}</p>
+                    </div>
+                `;
+            });
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        // Search and filter
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            document.querySelectorAll('.item-card').forEach(card => {
+                const message = card.querySelector('.item-message').textContent.toLowerCase();
+                card.style.display = message.includes(query) ? 'block' : 'none';
+            });
+        });
+
+        document.getElementById('sortFilter').addEventListener('change', (e) => {
+            // Reload with sort
+            loadData();
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) window.lucide.createIcons();
+            loadData();
+        });
+    </script>
+</body>
+</html>
